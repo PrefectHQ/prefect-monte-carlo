@@ -1,0 +1,21 @@
+{
+  "setWarehouseName": [
+    {
+      "warehouse": [
+        "id",
+        "uuid",
+        "name",
+        "connectionType",
+        "credentialsS3Key",
+        "bqProjectId",
+        "createdOn",
+        "config",
+        "dataSamplingEnabled",
+        "valueIngestionEnabled",
+        "valueBasedThresholdEnabled",
+        "customSqlSamplingSupported",
+        "customSqlSamplingEnabled"
+      ]
+    }
+  ]
+}

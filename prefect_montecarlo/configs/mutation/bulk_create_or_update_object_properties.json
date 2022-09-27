@@ -1,0 +1,14 @@
+{
+  "bulkCreateOrUpdateObjectProperties": [
+    {
+      "objectProperties": [
+        "id",
+        "mconId",
+        "propertyName",
+        "propertyValue",
+        "propertySourceType",
+        "propertySource"
+      ]
+    }
+  ]
+}

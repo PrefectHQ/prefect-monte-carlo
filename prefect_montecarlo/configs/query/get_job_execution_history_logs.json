@@ -1,0 +1,16 @@
+{
+  "getJobExecutionHistoryLogs": [
+    "jobExecutionUuid",
+    "startTime",
+    "status",
+    "endTime",
+    "exceptions",
+    {
+      "exceptionsDetail": [
+        "type",
+        "description",
+        "sqlQuery"
+      ]
+    }
+  ]
+}

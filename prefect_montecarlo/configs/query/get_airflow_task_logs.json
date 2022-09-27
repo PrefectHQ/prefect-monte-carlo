@@ -1,0 +1,7 @@
+{
+  "getAirflowTaskLogs": [
+    "messages",
+    "totalMessages",
+    "_id"
+  ]
+}

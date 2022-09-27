@@ -1,0 +1,10 @@
+{
+  "testSqlQueryPart": [
+    "columns",
+    "rows",
+    "query",
+    "hasError",
+    "error",
+    "samplingDisabled"
+  ]
+}

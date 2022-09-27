@@ -1,0 +1,10 @@
+{
+  "runCustomQuery": [
+    "columns",
+    "rows",
+    "query",
+    "hasError",
+    "error",
+    "samplingDisabled"
+  ]
+}

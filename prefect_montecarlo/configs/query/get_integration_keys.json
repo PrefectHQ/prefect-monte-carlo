@@ -1,0 +1,38 @@
+{
+  "getIntegrationKeys": [
+    "id",
+    "description",
+    "scope",
+    {
+      "warehouses": [
+        "id",
+        "uuid",
+        "name",
+        "connectionType",
+        "credentialsS3Key",
+        "bqProjectId",
+        "createdOn",
+        "config",
+        "dataSamplingEnabled",
+        "valueIngestionEnabled",
+        "valueBasedThresholdEnabled",
+        "customSqlSamplingSupported",
+        "customSqlSamplingEnabled"
+      ]
+    },
+    "createdTime",
+    {
+      "createdBy": [
+        "id",
+        "cognitoUserId",
+        "email",
+        "firstName",
+        "lastName",
+        "state",
+        "createdOn",
+        "isSso",
+        "role"
+      ]
+    }
+  ]
+}

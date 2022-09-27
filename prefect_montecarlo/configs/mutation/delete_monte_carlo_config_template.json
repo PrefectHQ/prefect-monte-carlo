@@ -1,0 +1,10 @@
+{
+  "deleteMonteCarloConfigTemplate": [
+    {
+      "response": [
+        "numDeleted",
+        "changesApplied"
+      ]
+    }
+  ]
+}

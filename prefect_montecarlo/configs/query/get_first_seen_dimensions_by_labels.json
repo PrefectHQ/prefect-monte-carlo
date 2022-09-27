@@ -1,0 +1,7 @@
+{
+  "getFirstSeenDimensionsByLabels": [
+    "timestamp",
+    "label",
+    "value"
+  ]
+}

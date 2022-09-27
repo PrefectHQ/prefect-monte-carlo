@@ -1,0 +1,15 @@
+{
+  "getInsights": [
+    "name",
+    "title",
+    "usage",
+    "description",
+    {
+      "reports": [
+        "name",
+        "description"
+      ]
+    },
+    "available"
+  ]
+}

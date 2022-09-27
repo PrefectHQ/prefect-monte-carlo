@@ -1,0 +1,6 @@
+{
+  "getRelatedUsers": [
+    "user",
+    "count"
+  ]
+}

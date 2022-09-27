@@ -1,0 +1,3 @@
+include versioneer.py
+include prefect_montecarlo/_version.py
+include prefect_montecarlo/configs/*/*.json

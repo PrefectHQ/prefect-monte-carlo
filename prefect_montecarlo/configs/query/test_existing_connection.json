@@ -1,0 +1,17 @@
+{
+  "testExistingConnection": [
+    "success",
+    {
+      "validations": [
+        "type",
+        "message"
+      ]
+    },
+    {
+      "warnings": [
+        "type",
+        "message"
+      ]
+    }
+  ]
+}

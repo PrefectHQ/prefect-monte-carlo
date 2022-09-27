@@ -1,0 +1,15 @@
+{
+  "getCustomMetrics": [
+    {
+      "metrics": [
+        "fullTableId",
+        "metric",
+        "value",
+        "field",
+        "timestamp",
+        "measurementTimestamp"
+      ]
+    },
+    "isPartialDateRange"
+  ]
+}

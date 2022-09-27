@@ -1,0 +1,21 @@
+{
+  "inviteUsers": [
+    {
+      "users": [
+        "id",
+        "uuid",
+        "email",
+        "state",
+        "createdOn",
+        "acceptedOn",
+        "role",
+        "authGroups",
+        "inviteType",
+        "lastSentTime",
+        "attempts",
+        "expiresAt"
+      ]
+    },
+    "clientMutationId"
+  ]
+}

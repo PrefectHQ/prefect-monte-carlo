@@ -1,0 +1,46 @@
+{
+  "updateCustomMetricRuleNotes": [
+    {
+      "customRule": [
+        "id",
+        "uuid",
+        "ruleType",
+        "warehouseUuid",
+        "intervalMinutes",
+        "intervalCrontab",
+        "startTime",
+        "timezone",
+        "creatorId",
+        "description",
+        "notes",
+        "prevExecutionTime",
+        "nextExecutionTime",
+        "lastCheckTimestamp",
+        "createdTime",
+        "updatedTime",
+        "isDeleted",
+        "snoozeUntilTime",
+        "slackSnoozeUser",
+        "dcScheduleUuid",
+        "dataCollectionDcScheduleUuid",
+        "customSql",
+        "override",
+        "variables",
+        "accountUuid",
+        "entities",
+        "projects",
+        "datasets",
+        "ruleName",
+        "namespace",
+        "isTemplateManaged",
+        "sequenceNumber",
+        "labels",
+        "systemSnoozeUntilTime",
+        "queryResultType",
+        "customSamplingSql",
+        "renderedCustomSql",
+        "isSnoozed"
+      ]
+    }
+  ]
+}

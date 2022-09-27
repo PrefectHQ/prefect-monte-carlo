@@ -1,0 +1,17 @@
+{
+  "getMonitorSummary": [
+    {
+      "resources": [
+        "table",
+        "view",
+        "external"
+      ]
+    },
+    "stats",
+    "categories",
+    "hourlyStats",
+    "jsonSchema",
+    "customSql",
+    "tableMetric"
+  ]
+}

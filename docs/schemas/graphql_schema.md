@@ -1,0 +1,1 @@
+::: prefect_montecarlo.schemas.graphql_schema

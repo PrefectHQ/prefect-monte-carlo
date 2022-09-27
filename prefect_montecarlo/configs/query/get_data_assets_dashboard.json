@@ -1,0 +1,10 @@
+{
+  "getDataAssetsDashboard": [
+    "dataSourcesCount",
+    "projectCount",
+    "schemaCount",
+    "tableCount",
+    "viewCount",
+    "externalTableCount"
+  ]
+}

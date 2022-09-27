@@ -1,0 +1,10 @@
+{
+  "createOrUpdateMonteCarloConfigTemplate": [
+    {
+      "response": [
+        "changesApplied",
+        "errorsAsJson"
+      ]
+    }
+  ]
+}

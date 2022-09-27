@@ -1,0 +1,16 @@
+{
+  "createOrUpdateCatalogObjectMetadata": [
+    {
+      "catalogObjectMetadata": [
+        "id",
+        "mcon",
+        "accountId",
+        "resourceId",
+        "description",
+        "createdTime",
+        "lastUpdateTime",
+        "source"
+      ]
+    }
+  ]
+}

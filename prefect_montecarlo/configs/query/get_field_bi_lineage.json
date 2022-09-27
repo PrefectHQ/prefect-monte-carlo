@@ -1,0 +1,10 @@
+{
+  "getFieldBiLineage": [
+    "biAccountId",
+    "biIdentifier",
+    "biName",
+    "biType",
+    "biNodeId",
+    "lastSeen"
+  ]
+}

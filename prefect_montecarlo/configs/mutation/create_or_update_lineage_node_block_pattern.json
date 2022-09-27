@@ -1,0 +1,17 @@
+{
+  "createOrUpdateLineageNodeBlockPattern": [
+    {
+      "pattern": [
+        "id",
+        "uuid",
+        "accountId",
+        "resourceId",
+        "datasetRegexp",
+        "projectRegexp",
+        "tableRegexp",
+        "createdTime",
+        "lastUpdateTime"
+      ]
+    }
+  ]
+}

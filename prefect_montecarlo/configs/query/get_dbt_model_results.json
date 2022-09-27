@@ -1,0 +1,19 @@
+{
+  "getDbtModelResults": [
+    {
+      "pageInfo": [
+        "hasNextPage",
+        "hasPreviousPage",
+        "startCursor",
+        "endCursor"
+      ]
+    },
+    {
+      "edges": [
+        "cursor"
+      ]
+    },
+    "edgeCount",
+    "totalCount"
+  ]
+}

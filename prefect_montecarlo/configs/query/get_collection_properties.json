@@ -1,0 +1,18 @@
+{
+  "getCollectionProperties": [
+    "crossAccountExternalId",
+    "customerAccountToken",
+    "codeBucket",
+    "codeVersion",
+    "platformAwsAccountId",
+    {
+      "platformRegionDetails": [
+        "gatewayEndpoint",
+        "gatewayVpce",
+        "linkerArn",
+        "logArn",
+        "templateLaunchUrl"
+      ]
+    }
+  ]
+}

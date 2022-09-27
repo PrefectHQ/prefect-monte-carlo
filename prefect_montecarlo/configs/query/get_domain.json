@@ -1,0 +1,13 @@
+{
+  "getDomain": [
+    "uuid",
+    "name",
+    "assignments",
+    {
+      "tags": [
+        "name",
+        "value"
+      ]
+    }
+  ]
+}

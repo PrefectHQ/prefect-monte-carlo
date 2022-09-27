@@ -1,0 +1,12 @@
+{
+  "getSlackChannels": [
+    {
+      "channels": [
+        "name",
+        "id",
+        "topic",
+        "purpose"
+      ]
+    }
+  ]
+}

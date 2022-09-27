@@ -1,0 +1,6 @@
+{
+  "getDatabricksClusterInfo": [
+    "clusterId",
+    "state"
+  ]
+}

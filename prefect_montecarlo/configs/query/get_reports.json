@@ -1,0 +1,6 @@
+{
+  "getReports": [
+    "name",
+    "description"
+  ]
+}

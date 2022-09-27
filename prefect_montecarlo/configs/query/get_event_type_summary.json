@@ -1,0 +1,17 @@
+{
+  "getEventTypeSummary": [
+    "schemaChange",
+    "freshAnom",
+    "unchangedSizeAnom",
+    "jsonSchemaChange",
+    "deleteTable",
+    "sizeAnom",
+    "sizeDiff",
+    "metricAnom",
+    "customRuleAnom",
+    "distAnom",
+    "queryRuntimeAnom",
+    "dbtModelError",
+    "dbtTestFailure"
+  ]
+}

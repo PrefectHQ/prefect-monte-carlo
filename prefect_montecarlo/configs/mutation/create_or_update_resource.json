@@ -1,0 +1,16 @@
+{
+  "createOrUpdateResource": [
+    {
+      "resource": [
+        "id",
+        "uuid",
+        "name",
+        "type",
+        "isUserProvided",
+        "isDefault",
+        "createdTime",
+        "lastUpdateTime"
+      ]
+    }
+  ]
+}

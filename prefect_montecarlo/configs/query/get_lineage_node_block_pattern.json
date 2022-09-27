@@ -1,0 +1,26 @@
+{
+  "getLineageNodeBlockPattern": [
+    "id",
+    "uuid",
+    "accountId",
+    "resourceId",
+    "datasetRegexp",
+    "projectRegexp",
+    "tableRegexp",
+    "createdTime",
+    {
+      "lastUpdateUser": [
+        "id",
+        "cognitoUserId",
+        "email",
+        "firstName",
+        "lastName",
+        "state",
+        "createdOn",
+        "isSso",
+        "role"
+      ]
+    },
+    "lastUpdateTime"
+  ]
+}

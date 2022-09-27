@@ -1,0 +1,21 @@
+{
+  "getUserAuthorization": [
+    "groups",
+    {
+      "domainRestrictions": [
+        "id",
+        "createdTime",
+        "updatedTime",
+        "uuid",
+        "name"
+      ]
+    },
+    {
+      "permissions": [
+        "permission",
+        "effect",
+        "domainRestrictionIds"
+      ]
+    }
+  ]
+}

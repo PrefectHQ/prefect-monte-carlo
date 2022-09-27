@@ -1,0 +1,21 @@
+{
+  "getQueryData": [
+    {
+      "queryData": [
+        "queryId",
+        "userName",
+        "timestamp",
+        "query",
+        "sourceDisplayName",
+        "destinationDisplayName"
+      ]
+    },
+    {
+      "queries": [
+        "metadata",
+        "timestamp"
+      ]
+    },
+    "offset"
+  ]
+}

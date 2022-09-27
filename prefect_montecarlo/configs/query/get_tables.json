@@ -1,0 +1,17 @@
+{
+  "getTables": [
+    {
+      "pageInfo": [
+        "hasNextPage",
+        "hasPreviousPage",
+        "startCursor",
+        "endCursor"
+      ]
+    },
+    {
+      "edges": [
+        "cursor"
+      ]
+    }
+  ]
+}

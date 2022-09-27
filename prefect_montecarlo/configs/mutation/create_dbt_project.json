@@ -1,0 +1,18 @@
+{
+  "createDbtProject": [
+    {
+      "dbtProject": [
+        "id",
+        "createdTime",
+        "updatedTime",
+        "uuid",
+        "accountId",
+        "projectName",
+        "source",
+        "generatesIncidents",
+        "lastModelImport",
+        "lastTestImport"
+      ]
+    }
+  ]
+}

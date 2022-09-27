@@ -1,0 +1,15 @@
+{
+  "getDerivedTablesPartialLineage": [
+    "mcon",
+    "sourceColumn",
+    {
+      "destinations": [
+        "mcon",
+        "sourceColumnUsedAsNonSelected",
+        "displayName"
+      ]
+    },
+    "isLastPage",
+    "cursor"
+  ]
+}

@@ -1,0 +1,1 @@
+::: prefect_montecarlo.get_table_columns_lineage

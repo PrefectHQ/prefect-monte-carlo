@@ -1,0 +1,17 @@
+{
+  "testTcpOpenConnection": [
+    "success",
+    {
+      "validations": [
+        "type",
+        "message"
+      ]
+    },
+    {
+      "warnings": [
+        "type",
+        "message"
+      ]
+    }
+  ]
+}

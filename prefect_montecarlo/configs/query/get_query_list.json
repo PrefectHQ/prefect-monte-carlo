@@ -1,0 +1,20 @@
+{
+  "getQueryList": [
+    {
+      "queries": [
+        "queryId",
+        "userName",
+        "timestamp",
+        "queryLength",
+        "queryHash",
+        "subCategory"
+      ]
+    },
+    {
+      "queriesByType": [
+        "queryLength"
+      ]
+    },
+    "offset"
+  ]
+}

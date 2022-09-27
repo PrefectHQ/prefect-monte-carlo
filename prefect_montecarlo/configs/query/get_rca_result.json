@@ -1,0 +1,16 @@
+{
+  "getRcaResult": [
+    "status",
+    "jobType",
+    {
+      "rcaData": [
+        "lowCardFieldsWoRca"
+      ]
+    },
+    {
+      "rcaDataV2": [
+        "__typename"
+      ]
+    }
+  ]
+}

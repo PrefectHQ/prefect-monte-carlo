@@ -1,0 +1,7 @@
+{
+  "getMonitorSchedulingConfiguration": [
+    "scheduleType",
+    "intervalMinutes",
+    "startTime"
+  ]
+}

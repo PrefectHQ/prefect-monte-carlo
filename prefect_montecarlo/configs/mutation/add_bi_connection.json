@@ -1,0 +1,16 @@
+{
+  "addBiConnection": [
+    {
+      "connection": [
+        "id",
+        "uuid",
+        "type",
+        "jobTypes",
+        "credentialsS3Key",
+        "data",
+        "createdOn",
+        "updatedOn"
+      ]
+    }
+  ]
+}

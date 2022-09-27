@@ -1,0 +1,5 @@
+{
+  "triggerCircuitBreakerRule": [
+    "jobExecutionUuid"
+  ]
+}

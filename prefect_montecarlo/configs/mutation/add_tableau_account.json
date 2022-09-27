@@ -1,0 +1,16 @@
+{
+  "addTableauAccount": [
+    {
+      "tableauAccount": [
+        "id",
+        "uuid",
+        "serverName",
+        "username",
+        "tokenName",
+        "siteName",
+        "verifySsl",
+        "createdOn"
+      ]
+    }
+  ]
+}

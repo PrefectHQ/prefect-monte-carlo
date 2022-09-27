@@ -1,0 +1,29 @@
+{
+  "createCollectorRecord": [
+    {
+      "dc": [
+        "id",
+        "uuid",
+        "apiGatewayId",
+        "kinesisEndpointId",
+        "cloudwatchLogEndpointId",
+        "crossAccountRoleArn",
+        "stackArn",
+        "customerAwsAccountId",
+        "customerAwsRegion",
+        "templateLaunchUrl",
+        "templateProvider",
+        "templateVariant",
+        "templateVersion",
+        "templateParameters",
+        "codeVersion",
+        "kinesisAccessRole",
+        "active",
+        "lastUpdated",
+        "isCustom",
+        "oauthCredentialsS3Key",
+        "releaseChannel"
+      ]
+    }
+  ]
+}

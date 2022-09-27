@@ -1,0 +1,14 @@
+{
+  "createUnifiedUserAssignment": [
+    {
+      "unifiedUserAssignment": [
+        "id",
+        "accountId",
+        "relationshipType",
+        "createdTime",
+        "isDeleted",
+        "objectMcon"
+      ]
+    }
+  ]
+}

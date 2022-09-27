@@ -1,0 +1,13 @@
+{
+  "getMonitorDashboardData": [
+    "totalMonitorCount",
+    "pausedCount",
+    "snoozedCount",
+    "activeCount",
+    "trainingCount",
+    "misconfiguredCount",
+    "errorCount",
+    "inProgressCount",
+    "noStatusCount"
+  ]
+}

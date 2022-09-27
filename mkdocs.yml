@@ -1,0 +1,199 @@
+site_name: prefect-montecarlo
+site_url: https://PrefectHQ.github.io/prefect-montecarlo
+repo_url: https://github.com/PrefectHQ/prefect-montecarlo
+edit_uri: /edit/main/docs/
+theme:
+  name: material
+  favicon: img/favicon.ico
+  palette:
+    primary: blue
+    accent: blue
+  icon:
+    repo: fontawesome/brands/github
+  logo:
+    img/prefect-logo-white.png
+  font:
+    text: Inter
+    code: Source Code Pro
+extra_css:
+    - stylesheets/extra.css
+markdown_extensions:
+    - admonition
+    - attr_list
+    - codehilite
+    - md_in_html
+    - meta
+    - pymdownx.highlight:
+        use_pygments: true
+    - pymdownx.superfences
+    - pymdownx.tabbed
+plugins:
+  - search
+  - gen-files:
+      scripts:
+        - docs/gen_ref_pages.py
+  - mkdocstrings:
+      handlers:
+        python:
+          rendering:
+            show_root_heading: True
+            show_object_full_path: False
+            show_category_heading: False
+            show_bases: False
+            show_signature: False
+            heading_level: 1
+      watch:
+        - prefect_montecarlo/
+        - README.md
+
+nav:
+    - Home: index.md
+    - Credentials: credentials.md
+    - Get Account Monitor Labels: get_account_monitor_labels.md
+    - Get Account Roles: get_account_roles.md
+    - Get Active Monitors: get_active_monitors.md
+    - Get Aggregated Metrics: get_aggregated_metrics.md
+    - Get Airflow Task Attempts: get_airflow_task_attempts.md
+    - Get Airflow Task Logs: get_airflow_task_logs.md
+    - Get Airflow Tasks: get_airflow_tasks.md
+    - Get All Domains: get_all_domains.md
+    - Get All User Defined Monitors: get_all_user_defined_monitors.md
+    - Get All User Defined Monitors V2: get_all_user_defined_monitors_v2.md
+    - Get Authorization Groups: get_authorization_groups.md
+    - Get Blast Radius Direct Queries: get_blast_radius_direct_queries.md
+    - Get Blast Radius Direct Queries For User: get_blast_radius_direct_queries_for_user.md
+    - Get Blast Radius Direct Queries Summary: get_blast_radius_direct_queries_summary.md
+    - Get Blast Radius Direct Queries V2: get_blast_radius_direct_queries_v2.md
+    - Get Blast Radius Direct Users: get_blast_radius_direct_users.md
+    - Get Blast Radius Direct Users V2: get_blast_radius_direct_users_v2.md
+    - Get Bq Projects: get_bq_projects.md
+    - Get Catalog Object Metadata: get_catalog_object_metadata.md
+    - Get Circuit Breaker Rule State: get_circuit_breaker_rule_state.md
+    - Get Collection Properties: get_collection_properties.md
+    - Get Comments For Monitor Incidents: get_comments_for_monitor_incidents.md
+    - Get Custom Metrics: get_custom_metrics.md
+    - Get Custom Rule: get_custom_rule.md
+    - Get Custom Rules: get_custom_rules.md
+    - Get Custom Sql Output Sample: get_custom_sql_output_sample.md
+    - Get Custom Users: get_custom_users.md
+    - Get Data Assets Dashboard: get_data_assets_dashboard.md
+    - Get Databricks Cluster Info: get_databricks_cluster_info.md
+    - Get Databricks Notebook Link: get_databricks_notebook_link.md
+    - Get Datasets: get_datasets.md
+    - Get Dbt Model Results: get_dbt_model_results.md
+    - Get Dbt Nodes: get_dbt_nodes.md
+    - Get Dbt Projects: get_dbt_projects.md
+    - Get Dbt Runs: get_dbt_runs.md
+    - Get Dbt Test Results: get_dbt_test_results.md
+    - Get Derived Tables Partial Lineage: get_derived_tables_partial_lineage.md
+    - Get Digraph: get_digraph.md
+    - Get Dimension Tracking Monitor Suggestions: get_dimension_tracking_monitor_suggestions.md
+    - Get Direct Blast Radius Counts: get_direct_blast_radius_counts.md
+    - Get Direct Lineage: get_direct_lineage.md
+    - Get Docs: get_docs.md
+    - Get Domain: get_domain.md
+    - Get Downstream Bi: get_downstream_bi.md
+    - Get Dt Reproduction Query: get_dt_reproduction_query.md
+    - Get Dt Sampling: get_dt_sampling.md
+    - Get Event: get_event.md
+    - Get Event Comments: get_event_comments.md
+    - Get Event Muting Rules: get_event_muting_rules.md
+    - Get Event Onboarding Data: get_event_onboarding_data.md
+    - Get Event Type Summary: get_event_type_summary.md
+    - Get Events: get_events.md
+    - Get Fh Reproduction Query: get_fh_reproduction_query.md
+    - Get Field Bi Lineage: get_field_bi_lineage.md
+    - Get Field Health Monitor Suggestions: get_field_health_monitor_suggestions.md
+    - Get First And Last Seen Dimensions By Labels: get_first_and_last_seen_dimensions_by_labels.md
+    - Get First Seen Dimensions By Labels: get_first_seen_dimensions_by_labels.md
+    - Get Generated Rules: get_generated_rules.md
+    - Get Hourly Row Counts: get_hourly_row_counts.md
+    - Get Incident Dashboard Data: get_incident_dashboard_data.md
+    - Get Incident Data Weekly: get_incident_data_weekly.md
+    - Get Incident Reaction: get_incident_reaction.md
+    - Get Incident Summaries: get_incident_summaries.md
+    - Get Incident Tables: get_incident_tables.md
+    - Get Incident Type Summary: get_incident_type_summary.md
+    - Get Incident Warehouse Tables: get_incident_warehouse_tables.md
+    - Get Incidents: get_incidents.md
+    - Get Insight: get_insight.md
+    - Get Insights: get_insights.md
+    - Get Integration Keys: get_integration_keys.md
+    - Get Invites In Account: get_invites_in_account.md
+    - Get Job Execution History Logs: get_job_execution_history_logs.md
+    - Get Latest Table Access Timestamp Metrics: get_latest_table_access_timestamp_metrics.md
+    - Get Lineage Edge: get_lineage_edge.md
+    - Get Lineage Node: get_lineage_node.md
+    - Get Lineage Node Block Pattern: get_lineage_node_block_pattern.md
+    - Get Lineage Node Block Patterns: get_lineage_node_block_patterns.md
+    - Get Lineage Node Properties: get_lineage_node_properties.md
+    - Get Metadata: get_metadata.md
+    - Get Metric Sampling: get_metric_sampling.md
+    - Get Metrics V3: get_metrics_v3.md
+    - Get Monitor: get_monitor.md
+    - Get Monitor Configuration: get_monitor_configuration.md
+    - Get Monitor Dashboard Data: get_monitor_dashboard_data.md
+    - Get Monitor Scheduling Configuration: get_monitor_scheduling_configuration.md
+    - Get Monitor Summary: get_monitor_summary.md
+    - Get Monitors: get_monitors.md
+    - Get Monitors By Type: get_monitors_by_type.md
+    - Get Monte Carlo Config Templates: get_monte_carlo_config_templates.md
+    - Get Non Table Metrics: get_non_table_metrics.md
+    - Get Object: get_object.md
+    - Get Object Properties: get_object_properties.md
+    - Get Object Property Name Values: get_object_property_name_values.md
+    - Get Object Property Names: get_object_property_names.md
+    - Get Object Property Values: get_object_property_values.md
+    - Get Parsed Query: get_parsed_query.md
+    - Get Pipeline Freshness V2: get_pipeline_freshness_v2.md
+    - Get Projects: get_projects.md
+    - Get Query By Id: get_query_by_id.md
+    - Get Query By Query Hash: get_query_by_query_hash.md
+    - Get Query Data: get_query_data.md
+    - Get Query Data By Query Hash: get_query_data_by_query_hash.md
+    - Get Query List: get_query_list.md
+    - Get Query Log Hashes On These Tables: get_query_log_hashes_on_these_tables.md
+    - Get Query Log Hashes That Affect These Tables: get_query_log_hashes_that_affect_these_tables.md
+    - Get Rca Result: get_rca_result.md
+    - Get Recent Timestamp: get_recent_timestamp.md
+    - Get Related Users: get_related_users.md
+    - Get Report Url: get_report_url.md
+    - Get Reports: get_reports.md
+    - Get Resource: get_resource.md
+    - Get Resources: get_resources.md
+    - Get Run Sql Rule State: get_run_sql_rule_state.md
+    - Get Segmented Where Condition Labels: get_segmented_where_condition_labels.md
+    - Get Sensitivity: get_sensitivity.md
+    - Get Slack Channels: get_slack_channels.md
+    - Get Slack Engagements For Incident: get_slack_engagements_for_incident.md
+    - Get Slack Messages For Incident: get_slack_messages_for_incident.md
+    - Get Slack Oauth Url: get_slack_oauth_url.md
+    - Get Table: get_table.md
+    - Get Table Columns Lineage: get_table_columns_lineage.md
+    - Get Table Fields Importance: get_table_fields_importance.md
+    - Get Table Stats: get_table_stats.md
+    - Get Tables: get_tables.md
+    - Get Thresholds: get_thresholds.md
+    - Get Time Axis Sql Expressions: get_time_axis_sql_expressions.md
+    - Get Token Metadata: get_token_metadata.md
+    - Get Top Category Labels: get_top_category_labels.md
+    - Get Unified User Assignments: get_unified_user_assignments.md
+    - Get Unified Users: get_unified_users.md
+    - Get User: get_user.md
+    - Get User Authorization: get_user_authorization.md
+    - Get User By Id: get_user_by_id.md
+    - Get Users In Account: get_users_in_account.md
+    - Get Warehouse: get_warehouse.md
+    - Graphql: graphql.md
+    - Monitor Labels: monitor_labels.md
+    - Mutations: mutations.md
+    - Run Custom Query: run_custom_query.md
+    - Search: search.md
+    - Test Existing Connection: test_existing_connection.md
+    - Test Sql Query Part: test_sql_query_part.md
+    - Test Sql Query Where Expression: test_sql_query_where_expression.md
+    - Test Tcp Open Connection: test_tcp_open_connection.md
+    - Test Telnet Connection: test_telnet_connection.md
+    - Thresholds: thresholds.md
+    - Graphql Schema: schemas/graphql_schema.md
+    

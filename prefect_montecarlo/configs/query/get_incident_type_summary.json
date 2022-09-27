@@ -1,0 +1,12 @@
+{
+  "getIncidentTypeSummary": [
+    "anomalies",
+    "schemaChanges",
+    "deletedTables",
+    "metricAnomalies",
+    "customRuleAnomalies",
+    "performanceAnomalies",
+    "dbtErrors",
+    "pseudoIntegrationTest"
+  ]
+}

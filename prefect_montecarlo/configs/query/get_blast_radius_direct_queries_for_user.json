@@ -1,0 +1,13 @@
+{
+  "getBlastRadiusDirectQueriesForUser": [
+    "date",
+    {
+      "tables": [
+        "fullTableId",
+        "mcon"
+      ]
+    },
+    "queryHash",
+    "queryCount"
+  ]
+}

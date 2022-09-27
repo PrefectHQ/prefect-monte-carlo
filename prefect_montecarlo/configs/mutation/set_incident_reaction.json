@@ -1,0 +1,23 @@
+{
+  "setIncidentReaction": [
+    {
+      "incident": [
+        "id",
+        "uuid",
+        "createdTime",
+        "updatedTime",
+        "owner",
+        "severity",
+        "feedback",
+        "feedbackTime",
+        "lastUpdateUser",
+        "project",
+        "dataset",
+        "incidentType",
+        "incidentSubTypes",
+        "incidentTime",
+        "reactionType"
+      ]
+    }
+  ]
+}

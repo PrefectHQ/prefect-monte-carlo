@@ -1,0 +1,15 @@
+{
+  "getQueryLogHashesOnTheseTables": [
+    "fullTableId",
+    "offset",
+    {
+      "queryHashes": [
+        "queryHash",
+        "userEmail",
+        "day",
+        "count",
+        "category"
+      ]
+    }
+  ]
+}

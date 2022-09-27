@@ -1,0 +1,11 @@
+{
+  "getTokenMetadata": [
+    "id",
+    "firstName",
+    "lastName",
+    "email",
+    "creationTime",
+    "expirationTime",
+    "comment"
+  ]
+}

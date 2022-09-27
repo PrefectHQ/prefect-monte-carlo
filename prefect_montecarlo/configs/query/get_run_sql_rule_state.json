@@ -1,0 +1,10 @@
+{
+  "getRunSqlRuleState": [
+    "jobExecutionUuid",
+    "accountUuid",
+    "resourceUuid",
+    "customRuleUuid",
+    "status",
+    "log"
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "getTableColumnsLineage": [
+    "mcon",
+    {
+      "columnsLineage": [
+        "selectedColumn"
+      ]
+    },
+    {
+      "nonSelectedSourceColumns": [
+        "mcon"
+      ]
+    },
+    "timestamp",
+    "displayName"
+  ]
+}

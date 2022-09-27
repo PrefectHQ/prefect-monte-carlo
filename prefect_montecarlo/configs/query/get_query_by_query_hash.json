@@ -1,0 +1,10 @@
+{
+  "getQueryByQueryHash": [
+    "queryId",
+    "userName",
+    "timestamp",
+    "query",
+    "sourceDisplayName",
+    "destinationDisplayName"
+  ]
+}

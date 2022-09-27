@@ -1,0 +1,43 @@
+{
+  "toggleMuteTable": [
+    {
+      "muted": [
+        "id",
+        "tableId",
+        "fullTableId",
+        "discoveredTime",
+        "friendlyName",
+        "description",
+        "location",
+        "projectName",
+        "dataset",
+        "tableType",
+        "isEncrypted",
+        "createdTime",
+        "lastModified",
+        "viewQuery",
+        "labels",
+        "path",
+        "priority",
+        "tracked",
+        "status",
+        "freshnessAnomaly",
+        "sizeAnomaly",
+        "freshnessSizeAnomaly",
+        "metricAnomaly",
+        "dynamicTable",
+        "isDeleted",
+        "lastObserved",
+        "dataProvider",
+        "mcon",
+        "schemaChangeCount",
+        "statusScalar",
+        "nodeId",
+        "isPartialDateRange",
+        "isMuted",
+        "isTransitioningDataProvider"
+      ]
+    },
+    "clientMutationId"
+  ]
+}

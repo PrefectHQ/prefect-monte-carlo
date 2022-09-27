@@ -1,0 +1,13 @@
+{
+  "getNonTableMetrics": [
+    {
+      "metrics": [
+        "metric",
+        "value",
+        "measurementTimestamp",
+        "jobExecutionUuid"
+      ]
+    },
+    "isPartialDateRange"
+  ]
+}

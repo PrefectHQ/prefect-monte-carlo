@@ -1,0 +1,17 @@
+{
+  "getBlastRadiusDirectQueriesSummary": [
+    {
+      "afterKey": [
+        "user"
+      ]
+    },
+    {
+      "data": [
+        "username",
+        "lastAccessedDate",
+        "distinctQueryCount",
+        "queryCount"
+      ]
+    }
+  ]
+}

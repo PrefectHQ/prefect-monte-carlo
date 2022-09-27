@@ -1,0 +1,12 @@
+{
+  "getPipelineFreshnessV2": [
+    {
+      "metricValuesByTable": [
+        "value",
+        "fullTableId",
+        "resourceId"
+      ]
+    },
+    "isPartialDateRange"
+  ]
+}

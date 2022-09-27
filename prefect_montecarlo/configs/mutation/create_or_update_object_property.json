@@ -1,0 +1,14 @@
+{
+  "createOrUpdateObjectProperty": [
+    {
+      "objectProperty": [
+        "id",
+        "mconId",
+        "propertyName",
+        "propertyValue",
+        "propertySourceType",
+        "propertySource"
+      ]
+    }
+  ]
+}

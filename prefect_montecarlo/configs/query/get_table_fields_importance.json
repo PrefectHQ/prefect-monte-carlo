@@ -1,0 +1,12 @@
+{
+  "getTableFieldsImportance": [
+    {
+      "tableFields": [
+        "fieldName",
+        "isImportant",
+        "fieldTypeDb",
+        "fieldType"
+      ]
+    }
+  ]
+}

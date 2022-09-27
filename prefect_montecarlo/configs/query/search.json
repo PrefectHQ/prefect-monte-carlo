@@ -1,0 +1,32 @@
+{
+  "search": [
+    "totalHits",
+    "offset",
+    {
+      "results": [
+        "mcon",
+        "lineageNodeId",
+        "objectType",
+        "objectId",
+        "displayName",
+        "parentMcon",
+        "path",
+        "projectId",
+        "dataset",
+        "tableId",
+        "resourceId",
+        "warehouseDisplayName",
+        "description",
+        "fieldType",
+        "fieldNames",
+        "isImportant",
+        "upstreamResourceIds"
+      ]
+    },
+    {
+      "facetResults": [
+        "facetType"
+      ]
+    }
+  ]
+}

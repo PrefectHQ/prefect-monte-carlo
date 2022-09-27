@@ -1,0 +1,77 @@
+{
+  "getWarehouse": [
+    "id",
+    "uuid",
+    "name",
+    "connectionType",
+    "credentialsS3Key",
+    "bqProjectId",
+    {
+      "account": [
+        "id",
+        "uuid",
+        "name",
+        "createdOn",
+        "config",
+        "allowNonSsoLogin",
+        "dataShare",
+        "activeCollectionRegions"
+      ]
+    },
+    {
+      "dataCollector": [
+        "id",
+        "uuid",
+        "apiGatewayId",
+        "kinesisEndpointId",
+        "cloudwatchLogEndpointId",
+        "crossAccountRoleArn",
+        "stackArn",
+        "customerAwsAccountId",
+        "customerAwsRegion",
+        "templateLaunchUrl",
+        "templateProvider",
+        "templateVariant",
+        "templateVersion",
+        "templateParameters",
+        "codeVersion",
+        "kinesisAccessRole",
+        "active",
+        "lastUpdated",
+        "isCustom",
+        "oauthCredentialsS3Key",
+        "releaseChannel"
+      ]
+    },
+    "createdOn",
+    "config",
+    {
+      "connections": [
+        "id",
+        "uuid",
+        "type",
+        "jobTypes",
+        "credentialsS3Key",
+        "data",
+        "createdOn",
+        "updatedOn"
+      ]
+    },
+    {
+      "muteRule": [
+        "id",
+        "uuid",
+        "ruleType",
+        "rule",
+        "isActive",
+        "createdTime",
+        "lastUpdateTime"
+      ]
+    },
+    "dataSamplingEnabled",
+    "valueIngestionEnabled",
+    "valueBasedThresholdEnabled",
+    "customSqlSamplingSupported",
+    "customSqlSamplingEnabled"
+  ]
+}

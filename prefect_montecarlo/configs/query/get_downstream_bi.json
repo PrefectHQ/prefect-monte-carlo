@@ -1,0 +1,25 @@
+{
+  "getDownstreamBi": [
+    "nodeId",
+    "fullTableId",
+    {
+      "downstreamBi": [
+        "workbookId",
+        "friendlyName",
+        "contentUrl",
+        "ownerId",
+        "projectId",
+        "projectName",
+        "created",
+        "updated",
+        "totalViews",
+        "workbookCreators",
+        "viewId",
+        "category",
+        "mcon",
+        "name",
+        "displayName"
+      ]
+    }
+  ]
+}

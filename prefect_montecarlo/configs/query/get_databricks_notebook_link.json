@@ -1,0 +1,6 @@
+{
+  "getDatabricksNotebookLink": [
+    "presignedUrl",
+    "notebookSource"
+  ]
+}

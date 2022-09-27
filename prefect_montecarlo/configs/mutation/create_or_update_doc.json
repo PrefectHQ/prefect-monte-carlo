@@ -1,0 +1,16 @@
+{
+  "createOrUpdateDoc": [
+    {
+      "doc": [
+        "id",
+        "createdTime",
+        "updatedTime",
+        "mcon",
+        "accountId",
+        "title",
+        "content",
+        "isDeleted"
+      ]
+    }
+  ]
+}

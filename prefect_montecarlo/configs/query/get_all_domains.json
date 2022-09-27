@@ -1,0 +1,13 @@
+{
+  "getAllDomains": [
+    "uuid",
+    "name",
+    "assignments",
+    {
+      "tags": [
+        "name",
+        "value"
+      ]
+    }
+  ]
+}

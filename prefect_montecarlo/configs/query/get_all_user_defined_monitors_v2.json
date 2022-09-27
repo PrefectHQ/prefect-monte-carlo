@@ -1,0 +1,17 @@
+{
+  "getAllUserDefinedMonitorsV2": [
+    {
+      "pageInfo": [
+        "hasNextPage",
+        "hasPreviousPage",
+        "startCursor",
+        "endCursor"
+      ]
+    },
+    {
+      "edges": [
+        "cursor"
+      ]
+    }
+  ]
+}

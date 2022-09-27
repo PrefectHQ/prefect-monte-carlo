@@ -1,0 +1,6 @@
+{
+  "getDirectBlastRadiusCounts": [
+    "queryCount",
+    "userCount"
+  ]
+}

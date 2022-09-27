@@ -1,0 +1,35 @@
+{
+  "pauseMonitor": [
+    {
+      "monitor": [
+        "id",
+        "uuid",
+        "type",
+        "fields",
+        "entities",
+        "projects",
+        "datasets",
+        "timeAxisFieldName",
+        "timeAxisFieldType",
+        "unnestFields",
+        "aggTimeInterval",
+        "historyDays",
+        "aggSelectExpression",
+        "whereCondition",
+        "createdTime",
+        "namespace",
+        "accountUuid",
+        "monitorName",
+        "isTemplateManaged",
+        "isPaused",
+        "disableLookBackBootstrap",
+        "segmentedExpressions",
+        "description",
+        "notes",
+        "mcon",
+        "fullTableId",
+        "monitorType"
+      ]
+    }
+  ]
+}

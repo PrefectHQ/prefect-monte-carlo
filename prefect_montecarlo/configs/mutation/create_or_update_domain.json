@@ -1,0 +1,11 @@
+{
+  "createOrUpdateDomain": [
+    {
+      "domain": [
+        "uuid",
+        "name",
+        "assignments"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "toggleMuteWithRegex": [
+    {
+      "muted": [
+        "id",
+        "uuid",
+        "project",
+        "dataset",
+        "isMuted",
+        "tableCount"
+      ]
+    },
+    "clientMutationId"
+  ]
+}

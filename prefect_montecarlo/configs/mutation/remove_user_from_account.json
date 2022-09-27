@@ -1,0 +1,17 @@
+{
+  "removeUserFromAccount": [
+    {
+      "user": [
+        "id",
+        "cognitoUserId",
+        "email",
+        "firstName",
+        "lastName",
+        "state",
+        "createdOn",
+        "isSso",
+        "role"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,6 @@
+{
+  "getSensitivity": [
+    "minDelay",
+    "level"
+  ]
+}

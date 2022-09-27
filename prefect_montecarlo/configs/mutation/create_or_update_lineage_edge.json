@@ -1,0 +1,15 @@
+{
+  "createOrUpdateLineageEdge": [
+    {
+      "edge": [
+        "edgeId",
+        "accountId",
+        "version",
+        "jobTs",
+        "expireAt",
+        "createdTime",
+        "lastUpdateTime"
+      ]
+    }
+  ]
+}

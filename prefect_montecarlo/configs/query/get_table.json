@@ -1,0 +1,137 @@
+{
+  "getTable": [
+    "id",
+    "tableId",
+    "fullTableId",
+    {
+      "warehouse": [
+        "id",
+        "uuid",
+        "name",
+        "connectionType",
+        "credentialsS3Key",
+        "bqProjectId",
+        "createdOn",
+        "config",
+        "dataSamplingEnabled",
+        "valueIngestionEnabled",
+        "valueBasedThresholdEnabled",
+        "customSqlSamplingSupported",
+        "customSqlSamplingEnabled"
+      ]
+    },
+    "discoveredTime",
+    "friendlyName",
+    "description",
+    "location",
+    "projectName",
+    "dataset",
+    "tableType",
+    "isEncrypted",
+    "createdTime",
+    "lastModified",
+    "viewQuery",
+    "labels",
+    "path",
+    "priority",
+    "tracked",
+    "status",
+    "freshnessAnomaly",
+    "sizeAnomaly",
+    "freshnessSizeAnomaly",
+    "metricAnomaly",
+    "dynamicTable",
+    "isDeleted",
+    "lastObserved",
+    "dataProvider",
+    "mcon",
+    "schemaChangeCount",
+    "statusScalar",
+    "nodeId",
+    "isPartialDateRange",
+    {
+      "lastUpdates": [
+        "value",
+        "measurementTimestamp"
+      ]
+    },
+    {
+      "lastUpdatesV2": [
+        "timeIntervalInSec"
+      ]
+    },
+    {
+      "totalRowCounts": [
+        "value",
+        "measurementTimestamp"
+      ]
+    },
+    {
+      "totalByteCounts": [
+        "value",
+        "measurementTimestamp"
+      ]
+    },
+    {
+      "writeThroughput": [
+        "value",
+        "measurementTimestamp"
+      ]
+    },
+    {
+      "objectsDeleted": [
+        "value",
+        "measurementTimestamp"
+      ]
+    },
+    {
+      "checkTableMetricsExistence": [
+        "metricName",
+        "exist"
+      ]
+    },
+    "isMuted",
+    {
+      "tableStats": [
+        "id",
+        "resourceUuid",
+        "fullTableId",
+        "projectName",
+        "datasetName",
+        "tableName",
+        "isImportant",
+        "importanceScore",
+        "avgReadsPerActiveDay",
+        "totalUsers",
+        "degreeOut",
+        "avgWritesPerActiveDay"
+      ]
+    },
+    {
+      "objectProperties": [
+        "id",
+        "mconId",
+        "propertyName",
+        "propertyValue",
+        "propertySourceType",
+        "propertySource"
+      ]
+    },
+    "isTransitioningDataProvider",
+    {
+      "tableCapabilities": [
+        "hasFreshness",
+        "hasRowsAndBytes",
+        "hasBytes",
+        "hasRows",
+        "hasVolumeSli",
+        "hasWriteThroughput",
+        "hasQueryLogs",
+        "hasLineage",
+        "hasFieldLineage",
+        "hasObjectsDeleted",
+        "hasTotalRowCountChange"
+      ]
+    }
+  ]
+}

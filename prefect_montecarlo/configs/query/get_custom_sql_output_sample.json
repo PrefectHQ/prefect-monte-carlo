@@ -1,0 +1,7 @@
+{
+  "getCustomSqlOutputSample": [
+    "columns",
+    "rows",
+    "samplingDisabled"
+  ]
+}

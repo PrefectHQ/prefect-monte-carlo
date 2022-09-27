@@ -1,0 +1,24 @@
+{
+  "createOrUpdateIncidentComment": [
+    {
+      "commentEvent": [
+        "id",
+        "eventType",
+        "createdTime",
+        "data",
+        "ackTimestamp",
+        "eventState",
+        "notifiedUsers",
+        "totalComments",
+        "importanceScore",
+        "isChild",
+        "uuid",
+        "monitorId",
+        "customRuleEntities",
+        "customRuleProjects",
+        "customRuleDatasets",
+        "eventGeneratedTime"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "getFirstAndLastSeenDimensionsByLabels": [
+    "timestamp",
+    "label",
+    {
+      "values": [
+        "measurementTimestamp",
+        "value"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "getSlackEngagementsForIncident": [
+    "id",
+    {
+      "message": [
+        "id",
+        "permalink",
+        "msgTs"
+      ]
+    },
+    "uuid",
+    "eventType",
+    "eventTs",
+    "data",
+    "createdTime",
+    "updatedTime"
+  ]
+}

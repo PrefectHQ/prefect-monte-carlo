@@ -1,0 +1,6 @@
+{
+  "getAccountMonitorLabels": [
+    "uuid",
+    "label"
+  ]
+}

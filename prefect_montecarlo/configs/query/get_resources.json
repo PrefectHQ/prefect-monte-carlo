@@ -1,0 +1,37 @@
+{
+  "getResources": [
+    "id",
+    "uuid",
+    {
+      "account": [
+        "id",
+        "uuid",
+        "name",
+        "createdOn",
+        "config",
+        "allowNonSsoLogin",
+        "dataShare",
+        "activeCollectionRegions"
+      ]
+    },
+    "name",
+    "type",
+    "isUserProvided",
+    "isDefault",
+    "createdTime",
+    {
+      "lastUpdateUser": [
+        "id",
+        "cognitoUserId",
+        "email",
+        "firstName",
+        "lastName",
+        "state",
+        "createdOn",
+        "isSso",
+        "role"
+      ]
+    },
+    "lastUpdateTime"
+  ]
+}

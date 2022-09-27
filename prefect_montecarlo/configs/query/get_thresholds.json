@@ -1,0 +1,52 @@
+{
+  "getThresholds": [
+    {
+      "freshness": [
+        "status",
+        "expected",
+        "breach",
+        "reason",
+        "lastUpdate"
+      ]
+    },
+    {
+      "size": [
+        "metric",
+        "ucsUpper",
+        "ucsLower",
+        "ucsMinSizeChange",
+        "ucsReason",
+        "ucsStatus",
+        "sdUpper",
+        "sdLower",
+        "sdReason",
+        "sdStatus"
+      ]
+    },
+    {
+      "fieldHealth": [
+        "lower",
+        "upper",
+        "reason"
+      ]
+    },
+    {
+      "dimensionTracking": [
+        "value",
+        "mnCnt",
+        "mxCnt",
+        "mnFld",
+        "mnFq",
+        "mxFq",
+        "reason"
+      ]
+    },
+    {
+      "dynamic": [
+        "min",
+        "max",
+        "reason"
+      ]
+    }
+  ]
+}

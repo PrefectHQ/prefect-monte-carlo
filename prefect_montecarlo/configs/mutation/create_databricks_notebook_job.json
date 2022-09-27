@@ -1,0 +1,12 @@
+{
+  "createDatabricksNotebookJob": [
+    {
+      "databricks": [
+        "workspaceJobId",
+        "workspaceJobName",
+        "workspaceNotebookPath",
+        "notebookSource"
+      ]
+    }
+  ]
+}

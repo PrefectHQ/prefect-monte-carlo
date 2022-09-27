@@ -1,0 +1,17 @@
+{
+  "createCustomUser": [
+    {
+      "customUser": [
+        "id",
+        "uuid",
+        "accountId",
+        "email",
+        "firstName",
+        "lastName",
+        "createdTime",
+        "lastUpdateTime",
+        "isDeleted"
+      ]
+    }
+  ]
+}

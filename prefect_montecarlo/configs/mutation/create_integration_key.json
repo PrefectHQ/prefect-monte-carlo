@@ -1,0 +1,10 @@
+{
+  "createIntegrationKey": [
+    {
+      "key": [
+        "id",
+        "secret"
+      ]
+    }
+  ]
+}

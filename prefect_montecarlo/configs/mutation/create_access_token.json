@@ -1,0 +1,10 @@
+{
+  "createAccessToken": [
+    {
+      "accessToken": [
+        "id",
+        "token"
+      ]
+    }
+  ]
+}

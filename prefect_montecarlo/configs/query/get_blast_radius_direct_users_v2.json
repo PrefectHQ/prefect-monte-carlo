@@ -1,0 +1,15 @@
+{
+  "getBlastRadiusDirectUsersV2": [
+    {
+      "afterKey": [
+        "user"
+      ]
+    },
+    {
+      "data": [
+        "username",
+        "queryCount"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "createOrUpdateSamlIdentityProvider": [
+    {
+      "account": [
+        "id",
+        "uuid",
+        "name",
+        "createdOn",
+        "config",
+        "allowNonSsoLogin",
+        "dataShare",
+        "activeCollectionRegions"
+      ]
+    }
+  ]
+}

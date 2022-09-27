@@ -1,0 +1,20 @@
+{
+  "getBlastRadiusDirectQueries": [
+    {
+      "afterKey": [
+        "user",
+        "date",
+        "queryHash"
+      ]
+    },
+    {
+      "data": [
+        "date",
+        "username",
+        "queryHash",
+        "queryCount",
+        "tables"
+      ]
+    }
+  ]
+}

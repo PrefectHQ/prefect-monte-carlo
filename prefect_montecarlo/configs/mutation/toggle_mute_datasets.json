@@ -1,0 +1,15 @@
+{
+  "toggleMuteDatasets": [
+    {
+      "muted": [
+        "id",
+        "uuid",
+        "project",
+        "dataset",
+        "isMuted",
+        "tableCount"
+      ]
+    },
+    "clientMutationId"
+  ]
+}

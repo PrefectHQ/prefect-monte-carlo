@@ -1,0 +1,10 @@
+{
+  "getCircuitBreakerRuleState": [
+    "jobExecutionUuid",
+    "accountUuid",
+    "resourceUuid",
+    "customRuleUuid",
+    "status",
+    "log"
+  ]
+}

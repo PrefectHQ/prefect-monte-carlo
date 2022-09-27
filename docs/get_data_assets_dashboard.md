@@ -1,0 +1,1 @@
+::: prefect_montecarlo.get_data_assets_dashboard

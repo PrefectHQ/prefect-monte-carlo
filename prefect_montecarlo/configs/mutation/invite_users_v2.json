@@ -1,0 +1,22 @@
+{
+  "inviteUsersV2": [
+    {
+      "invites": [
+        "id",
+        "uuid",
+        "email",
+        "state",
+        "createdOn",
+        "acceptedOn",
+        "role",
+        "authGroups",
+        "inviteType",
+        "lastSentTime",
+        "attempts",
+        "expiresAt"
+      ]
+    },
+    "existingUsers",
+    "alreadyInvited"
+  ]
+}

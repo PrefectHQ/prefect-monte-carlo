@@ -1,0 +1,22 @@
+{
+  "updateUserAuthorizationGroupMembership": [
+    {
+      "addedToGroups": [
+        "name",
+        "version",
+        "isManaged",
+        "label",
+        "description"
+      ]
+    },
+    {
+      "removedFromGroups": [
+        "name",
+        "version",
+        "isManaged",
+        "label",
+        "description"
+      ]
+    }
+  ]
+}
