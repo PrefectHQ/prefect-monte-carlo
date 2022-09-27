@@ -2,7 +2,7 @@
 
 from prefect.blocks.core import Block
 from pydantic import Field, SecretStr
-from sgqlc.endpoint.http import HTTPEndpoint
+from sgqlc.endpoint.requests import RequestsEndpoint
 
 
 class MontecarloCredentials(Block):
@@ -33,15 +33,15 @@ class MontecarloCredentials(Block):
         description="The ID associated with the Montecarlo API token.",
     )
     
-    def get_endpoint(self) -> HTTPEndpoint:
+    def get_endpoint(self) -> RequestsEndpoint:
         """
-        Gets an authenticated Montecarlo GraphQL HTTPEndpoint.
+        Gets an authenticated Montecarlo GraphQL RequestsEndpoint.
 
         Returns:
-            An authenticated Montecarlo GraphQL HTTPEndpoint
+            An authenticated Montecarlo GraphQL RequestsEndpoint
 
         Example:
-            Gets an authenticated Montecarlo GraphQL HTTPEndpoint.
+            Gets an authenticated Montecarlo GraphQL RequestsEndpoint.
             ```python
             from prefect import flow
             from prefect_montecarlo import run_custom_query
@@ -66,7 +66,7 @@ class MontecarloCredentials(Block):
             "Content-Type": "application/json",
         }
 
-        endpoint = HTTPEndpoint(
+        endpoint = RequestsEndpoint(
             "https://api.getmontecarlo.com/graphql", base_headers=base_headers
         )
         return endpoint
