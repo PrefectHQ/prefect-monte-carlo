@@ -1,1 +1,0 @@
-::: prefect_montecarlo.get_object_property_values

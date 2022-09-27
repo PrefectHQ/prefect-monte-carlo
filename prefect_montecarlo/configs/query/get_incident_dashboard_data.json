@@ -1,9 +1,0 @@
-{
-  "getIncidentDashboardData": [
-    "totalIncidentCount",
-    "noStatusCount",
-    "investigatingCount",
-    "fixedCount",
-    "expectedAndNoActionCount"
-  ]
-}

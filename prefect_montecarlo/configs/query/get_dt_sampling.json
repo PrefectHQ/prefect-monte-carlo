@@ -1,8 +1,0 @@
-{
-  "getDtSampling": [
-    "columns",
-    "rows",
-    "query",
-    "hasError"
-  ]
-}

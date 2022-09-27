@@ -1,146 +1,77 @@
-"""
-This is a module containing generic GraphQL tasks
-"""
-
-# This module was auto-generated using prefect-collection-generator so
-# manually editing this file is not recommended.
-
-from functools import partial
-from pprint import pformat
-from typing import Any, Dict, Iterable, List, Tuple, Union
-
-from anyio import to_thread
 from prefect import task
-from sgqlc.operation import Operation, Selection
-
-from prefect_montecarlo import MontecarloCredentials
-from prefect_montecarlo.utils import camel_to_snake_case
-
-
-async def _execute_graphql_op(
-    op: Union[Operation, str],
-    montecarlo_credentials: MontecarloCredentials,
-    error_key: str = "errors",
-    **vars,
-) -> Dict[str, Any]:
-    """
-    Helper function for executing GraphQL operations.
-    """
-    endpoint = montecarlo_credentials.get_endpoint()
-    partial_endpoint = partial(endpoint, op, vars)
-    result = await to_thread.run_sync(partial_endpoint)
-    if error_key in result:
-        errors = pformat(result[error_key])
-        raise RuntimeError(f"Error encountered:\n{errors}")
-    return result["data"]
-
-
-def _subset_return_fields(
-    op_selection: Selection,
-    op_stack: List[str],
-    return_fields: Iterable[str],
-    return_fields_defaults: Dict[Tuple, Tuple],
-):
-    """
-    Helper function to subset return fields.
-    """
-    if not return_fields:
-        return_fields = return_fields_defaults[op_stack]
-    elif isinstance(return_fields, str):
-        return_fields = (return_fields,)
-
-    return_fields = tuple(
-        camel_to_snake_case(return_field) for return_field in return_fields
-    )
-
-    try:
-        op_selection.__fields__(*return_fields)
-    except KeyError:  # nested under node
-        op_selection.nodes().__fields__(*return_fields)
-    return op_selection
-
+from prefect_montecarlo.credentials import MontecarloCredentials
+from typing import Dict, Optional
 
 @task
-async def execute_graphql(
-    op: Union[Operation, str],
+def execute_graphql_query(
     montecarlo_credentials: MontecarloCredentials,
-    error_key: str = "errors",
-    **vars,
-) -> Dict[str, Any]:
-    # NOTE: Maintainers can update these examples to match their collection!
+    query: str,
+    variables: Optional[Dict] = None,
+) -> dict:
     """
-    Generic function for executing GraphQL operations.
+    Executes a GraphQL query against the Montecarlo GraphQL API.
 
     Args:
-        op: The operation, either as a valid GraphQL string or sgqlc.Operation.
-        montecarlo_credentials: Credentials to use for authentication with Montecarlo.
-        error_key: The key name to look out for in the response
-            that indicates an error has occurred with the request.
+        montecarlo_credentials: the credentials to authenticate with the Montecarlo GraphQL API.
+        query: the GraphQL query to execute.
+        variables: the variables to pass to the GraphQL query.
 
     Returns:
-        A dict of the returned fields.
+        The results of the GraphQL query.
 
-    Examples:
-        Queries the first three issues from the Prefect repository
-        using a string query.
+    Example:
+        Executes a simple GraphQL query against the Montecarlo GraphQL API.
         ```python
         from prefect import flow
-        from prefect_github import GitHubCredentials
-        from prefect_github.graphql import execute_graphql
+        from prefect_montecarlo import execute_graphql_query
+        from prefect_montecarlo.credentials import MontecarloCredentials
 
-        @flow()
-        def example_execute_graphql_flow():
-            op = '''
-                query GitHubRepoIssues($owner: String!, $name: String!) {
-                    repository(owner: $owner, name: $name) {
-                        issues(last: 3) {
-                            nodes {
-                                number
-                                title
-                            }
+        @flow
+        def example_execute_query():
+            montecarlo_credentials = MontecarloCredentials.load(
+                "my-montecarlo-credentials"
+            )
+            result = execute_graphql_query(
+                montecarlo_credentials=montecarlo_credentials,
+                query="query getUser { getUser { email firstName lastName }}",
+            )
+
+        example_execute_query()
+        ```
+        
+        Executes a GraphQL query with variables.
+        ```python
+        from prefect import flow
+
+        from prefect_montecarlo.credentials import MontecarloCredentials
+        from prefect_montecarlo.graphql import execute_graphql_query
+
+        mc_creds = MontecarloCredentials.load("monte-carlo-credentials")
+
+        query = '''
+            query getTables($first: Int){
+                getTables(first: $first) {
+                    edges {
+                        node {
+                            fullTableId
                         }
                     }
                 }
-            '''
-            token = "ghp_..."
-            github_credentials = GitHubCredentials(token=token)
-            params = dict(owner="PrefectHQ", name="Prefect")
-            result = execute_graphql(op, github_credentials, **params)
-            return result
+            }
+        '''
 
-        example_execute_graphql_flow()
-        ```
-
-        Queries the first three issues from Prefect repository
-        using a sgqlc.Operation.
-        ```python
-        from prefect import flow
-        from sgqlc.operation import Operation
-        from prefect_github import GitHubCredentials
-        from prefect_github.schemas import graphql_schema
-        from prefect_github.graphql import execute_graphql
-
-        @flow()
-        def example_execute_graphql_flow():
-            op = Operation(graphql_schema.Query)
-            op_settings = op.repository(
-                owner="PrefectHQ", name="Prefect"
-            ).issues(
-                first=3
-            ).nodes()
-            op_settings.__fields__("id", "title")
-            token = "ghp_..."
-            github_credentials = GitHubCredentials(token=token)
-            result = execute_graphql(
-                op,
-                github_credentials,
+        @flow
+        def test_mc():
+            
+            result = execute_graphql_query(
+                montecarlo_credentials=mc_creds,
+                query=query,
+                variables={"first":10}
             )
-            return result
-
-        example_execute_graphql_flow()
+            
+        if __name__ == "__main__":
+            test_mc()
         ```
     """
-    result = await _execute_graphql_op(
-        op, montecarlo_credentials, error_key=error_key, **vars
-    )
-    return result
+    client = montecarlo_credentials.get_client()
+    return client(query, variables=variables)

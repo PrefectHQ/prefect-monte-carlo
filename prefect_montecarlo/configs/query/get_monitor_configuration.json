@@ -1,7 +1,0 @@
-{
-  "getMonitorConfiguration": [
-    "timeField",
-    "aggregationType",
-    "lookbackDays"
-  ]
-}

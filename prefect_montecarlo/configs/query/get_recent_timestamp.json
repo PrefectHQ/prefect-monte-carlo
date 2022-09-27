@@ -1,7 +1,0 @@
-{
-  "getRecentTimestamp": [
-    "fieldName",
-    "timestamp",
-    "isTimeAxis"
-  ]
-}

@@ -1,9 +1,0 @@
-{
-  "getAccountRoles": [
-    "name",
-    "version",
-    "isManaged",
-    "label",
-    "description"
-  ]
-}

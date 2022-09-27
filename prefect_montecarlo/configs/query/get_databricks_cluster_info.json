@@ -1,6 +1,0 @@
-{
-  "getDatabricksClusterInfo": [
-    "clusterId",
-    "state"
-  ]
-}

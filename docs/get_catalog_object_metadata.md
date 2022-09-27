@@ -1,1 +1,0 @@
-::: prefect_montecarlo.get_catalog_object_metadata

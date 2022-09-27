@@ -1,1 +1,0 @@
-::: prefect_montecarlo.get_dbt_model_results

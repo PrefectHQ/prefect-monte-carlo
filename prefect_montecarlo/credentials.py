@@ -1,8 +1,8 @@
 """Credential classes used to perform authenticated interactions with Montecarlo"""
 
 from prefect.blocks.core import Block
+from pycarlo.core import Client, Session
 from pydantic import Field, SecretStr
-from sgqlc.endpoint.requests import RequestsEndpoint
 
 
 class MontecarloCredentials(Block):
@@ -33,7 +33,7 @@ class MontecarloCredentials(Block):
         description="The ID associated with the Montecarlo API token.",
     )
     
-    def get_endpoint(self) -> RequestsEndpoint:
+    def get_client(self) -> Client:
         """
         Gets an authenticated Montecarlo GraphQL RequestsEndpoint.
 
@@ -44,29 +44,26 @@ class MontecarloCredentials(Block):
             Gets an authenticated Montecarlo GraphQL RequestsEndpoint.
             ```python
             from prefect import flow
-            from prefect_montecarlo import run_custom_query
+            from prefect_montecarlo import execute_graphql_query
             from prefect_montecarlo.credentials import MontecarloCredentials
 
             @flow
-            def example_run_custom_query():
+            def example_execute_query():
                 montecarlo_credentials = MontecarloCredentials.load(
                     "my-montecarlo-credentials"
                 )
-                result = run_custom_query(
+                result = execute_graphql_query(
                     montecarlo_credentials=montecarlo_credentials,
-                    query="query getTables{ getTables(first:3) { edges { node { fullTableId } } } }",
+                    query="query getUser {  getUser {    email   firstName    lastName  }}",
                 )
 
-            example_get_endpoint_flow()
+            example_execute_query()
             ```
         """
-        base_headers = {
-            "x-mcd-id": self.api_token_id.get_secret_value(),
-            "x-mcd-token": self.api_token.get_secret_value(),
-            "Content-Type": "application/json",
-        }
-
-        endpoint = RequestsEndpoint(
-            "https://api.getmontecarlo.com/graphql", base_headers=base_headers
+        
+        return Client(
+            session=Session(
+                mcd_id=self.api_token_id.get_secret_value(),
+                mcd_token=self.api_token.get_secret_value(),
+            )
         )
-        return endpoint
