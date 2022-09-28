@@ -1,12 +1,12 @@
-import pytest
-from sgqlc.endpoint.http import HTTPEndpoint
+from prefect_montecarlo.credentials import MontecarloCredentials
+from pycarlo.core import Client
 
-from prefect_montecarlo import MontecarloCredentials
-
-
-@pytest.mark.parametrize("token", [None, "token_value"])
-def test_montecarlo_credentials_get_endpoint(token):
-    endpoint = MontecarloCredentials(token=token).get_endpoint()
-    assert isinstance(endpoint, HTTPEndpoint)
-    if token is not None:
-        assert endpoint.base_headers == {"Authorization": "Bearer token_value"}
+async def test_montecarlo_credentials_get_client():
+    mc_credentials = MontecarloCredentials(
+        api_token="test-token",
+        api_token_id="test-token-id",
+    )
+    
+    mc_client = await mc_credentials.get_client()
+    
+    assert isinstance(mc_client, Client)

@@ -33,7 +33,7 @@ class MontecarloCredentials(Block):
         description="The ID associated with the Montecarlo API token.",
     )
     
-    def get_client(self) -> Client:
+    async def get_client(self) -> Client:
         """
         Gets an authenticated Montecarlo GraphQL RequestsEndpoint.
 

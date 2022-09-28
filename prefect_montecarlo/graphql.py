@@ -3,7 +3,7 @@ from prefect_montecarlo.credentials import MontecarloCredentials
 from typing import Dict, Optional
 
 @task
-def execute_graphql_query(
+async def execute_graphql_query(
     montecarlo_credentials: MontecarloCredentials,
     query: str,
     variables: Optional[Dict] = None,
@@ -73,5 +73,5 @@ def execute_graphql_query(
             test_mc()
         ```
     """
-    client = montecarlo_credentials.get_client()
+    client = await montecarlo_credentials.get_client()
     return client(query, variables=variables)

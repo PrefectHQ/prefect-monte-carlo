@@ -1,48 +1,50 @@
 import pytest
+
 from prefect import flow
-from sgqlc.operation import Operation, Selector
+from prefect_montecarlo.graphql import execute_graphql_query
+from pycarlo.common.errors import GqlError
 
-from prefect_montecarlo.graphql import _subset_return_fields, execute_graphql
-from prefect_montecarlo.schemas import graphql_schema
-
-
-@pytest.mark.parametrize(
-    "return_fields_key", ["return_fields", "return_fields_defaults"]
-)
-def test_subset_return_fields(return_fields_key):
-    op = Operation(graphql_schema.Query)
-    op_stack = graphql_schema.Query.__field_names__[:1]
-    op_selection = getattr(op, op_stack[0])
-    subset_kwargs = {"return_fields": [], "return_fields_defaults": {}}
-    return_fields = ["id"]
-    if return_fields_key == "return_fields":
-        subset_kwargs[return_fields_key] = return_fields
-    else:
-        subset_kwargs[return_fields_key] = {op_stack: return_fields}
-    op_selection = _subset_return_fields(op_selection, op_stack, **subset_kwargs)
-    assert isinstance(op_selection, Selector)
-
-
-class MockCredentials:
-    def __init__(self, error_key=None):
-        self.result = (
-            {error_key: "Errors encountered:"} if error_key else {"data": "success"}
-        )
-
-    def get_endpoint(self):
-        return lambda op, vars: self.result
-
-
-@pytest.mark.parametrize("error_key", ["errors", False])
-def test_execute_graphql(error_key):
-    mock_credentials = MockCredentials(error_key=error_key)
-
+async def test_execute_graphql_query_no_vars(
+    montecarlo_credentials,
+    sample_get_tables_query_response,
+    mock_successful_get_tables_query_response
+):
     @flow
-    def test_flow():
-        return execute_graphql("op", mock_credentials)
+    async def test_flow():
+        return await execute_graphql_query(
+            montecarlo_credentials=montecarlo_credentials,
+            query="query getTables { getTables { edges { node { fullTableId } } } }",
+        )
+        
+    result = await test_flow()
+    
+    assert result == sample_get_tables_query_response
 
-    if error_key:
-        with pytest.raises(RuntimeError, match="Errors encountered:"):
-            test_flow()
-    else:
-        assert test_flow() == "success"
+@pytest.mark.parametrize("variables", [{"second": 10}, None])
+async def test_execute_graphql_query_with_bad_vars(
+    montecarlo_credentials,
+    variables,
+    mock_bad_variable_get_tables_query_response
+):
+    @flow
+    async def test_flow():
+        query = """
+            query getTables($first: Int){
+                getTables(first: $first) {
+                    edges {
+                        node {
+                            fullTableId
+                        }
+                    }
+                }
+            }
+        """
+        return await execute_graphql_query(
+            montecarlo_credentials=montecarlo_credentials,
+            query=query,
+            variables=variables
+        )
+        
+    with pytest.raises(GqlError):
+        await test_flow()
+    
