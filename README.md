@@ -1,18 +1,18 @@
-# prefect-montecarlo
+# prefect-monte-carlo
 
 <p align="center">
-    <a href="https://pypi.python.org/pypi/prefect-montecarlo/" alt="PyPI version">
-        <img alt="PyPI" src="https://img.shields.io/pypi/v/prefect-montecarlo?color=0052FF&labelColor=090422"></a>
-    <a href="https://github.com/PrefectHQ/prefect-montecarlo/" alt="Stars">
-        <img src="https://img.shields.io/github/stars/PrefectHQ/prefect-montecarlo?color=0052FF&labelColor=090422" /></a>
-    <a href="https://pepy.tech/badge/prefect-montecarlo/" alt="Downloads">
-        <img src="https://img.shields.io/pypi/dm/prefect-montecarlo?color=0052FF&labelColor=090422" /></a>
-    <a href="https://github.com/PrefectHQ/prefect-montecarlo/pulse" alt="Activity">
-        <img src="https://img.shields.io/github/commit-activity/m/PrefectHQ/prefect-montecarlo?color=0052FF&labelColor=090422" /></a>
+    <a href="https://pypi.python.org/pypi/prefect-monte-carlo/" alt="PyPI version">
+        <img alt="PyPI" src="https://img.shields.io/pypi/v/prefect-monte-carlo?color=0052FF&labelColor=090422"></a>
+    <a href="https://github.com/PrefectHQ/prefect-monte-carlo/" alt="Stars">
+        <img src="https://img.shields.io/github/stars/PrefectHQ/prefect-monte-carlo?color=0052FF&labelColor=090422" /></a>
+    <a href="https://pepy.tech/badge/prefect-monte-carlo/" alt="Downloads">
+        <img src="https://img.shields.io/pypi/dm/prefect-monte-carlo?color=0052FF&labelColor=090422" /></a>
+    <a href="https://github.com/PrefectHQ/prefect-monte-carlo/pulse" alt="Activity">
+        <img src="https://img.shields.io/github/commit-activity/m/PrefectHQ/prefect-monte-carlo?color=0052FF&labelColor=090422" /></a>
     <br>
-    <a href="https://prefect-montecarlo-community.slack.com" alt="Slack">
+    <a href="https://prefect-monte-carlo-community.slack.com" alt="Slack">
         <img src="https://img.shields.io/badge/slack-join_community-red.svg?color=0052FF&labelColor=090422&logo=slack" /></a>
-    <a href="https://discourse.prefect-montecarlo.io/" alt="Discourse">
+    <a href="https://discourse.prefect-monte-carlo.io/" alt="Discourse">
         <img src="https://img.shields.io/badge/discourse-browse_forum-red.svg?color=0052FF&labelColor=090422&logo=discourse" /></a>
 </p>
 
@@ -32,46 +32,46 @@ These tasks are designed to work with Prefect 2.0. For more information about ho
 
 ### Installation
 
-Install `prefect-montecarlo` with `pip`:
+Install `prefect-monte-carlo` with `pip`:
 
 ```bash
-pip install prefect-montecarlo
+pip install prefect-monte-carlo
 ```
 
 ### Write and run a flow
 
 ```python
 from prefect import flow
-from prefect_montecarlo.tasks import (
-    goodbye_prefect_montecarlo,
-    hello_prefect_montecarlo,
+from prefect_monte_carlo.tasks import (
+    goodbye_prefect_monte-carlo,
+    hello_prefect_monte-carlo,
 )
 
 
 @flow
 def example_flow():
-    hello_prefect_montecarlo
-    goodbye_prefect_montecarlo
+    hello_prefect_monte_carlo
+    goodbye_prefect_monte_carlo
 
 example_flow()
 ```
 
 ## Resources
 
-If you encounter any bugs while using `prefect-montecarlo`, feel free to open an issue in the [prefect-montecarlo](https://github.com/PrefectHQ/prefect-montecarlo) repository.
+If you encounter any bugs while using `prefect-monte-carlo`, feel free to open an issue in the [prefect-monte-carlo](https://github.com/PrefectHQ/prefect-monte-carlo) repository.
 
-If you have any questions or issues while using `prefect-montecarlo`, you can find help in either the [Prefect Discourse forum](https://discourse.prefect.io/) or the [Prefect Slack community](https://prefect.io/slack).
+If you have any questions or issues while using `prefect-monte-carlo`, you can find help in either the [Prefect Discourse forum](https://discourse.prefect.io/) or the [Prefect Slack community](https://prefect.io/slack).
 
-Feel free to ⭐️ or watch [`prefect-montecarlo`](https://github.com/PrefectHQ/prefect-montecarlo) for updates too!
+Feel free to ⭐️ or watch [`prefect-monte-carlo`](https://github.com/PrefectHQ/prefect-monte-carlo) for updates too!
 
 ## Development
 
-If you'd like to install a version of `prefect-montecarlo` for development, clone the repository and perform an editable install with `pip`:
+If you'd like to install a version of `prefect-monte-carlo` for development, clone the repository and perform an editable install with `pip`:
 
 ```bash
-git clone https://github.com/PrefectHQ/prefect-montecarlo.git
+git clone https://github.com/PrefectHQ/prefect-monte-carlo.git
 
-cd prefect-montecarlo/
+cd prefect-monte-carlo/
 
 pip install -e ".[dev]"
 

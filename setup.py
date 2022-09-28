@@ -12,13 +12,13 @@ with open("README.md") as readme_file:
     readme = readme_file.read()
 
 setup(
-    name="prefect-montecarlo",
-    description="Prefect integrations for interacting with Montecarlo.",
+    name="prefect-monte-carlo",
+    description="Prefect integrations for interacting with Monte Carlo.",
     license="Apache License 2.0",
     author="Prefect Technologies",
     author_email="help@prefect.io",
     keywords="prefect",
-    url="https://github.com/PrefectHQ/prefect-montecarlo",
+    url="https://github.com/PrefectHQ/prefect-monte-carlo",
     long_description=readme,
     long_description_content_type="text/markdown",
     version=versioneer.get_version(),
@@ -30,7 +30,7 @@ setup(
     extras_require={"dev": dev_requires},
     entry_points={
         "prefect.collections": [
-            "MontecarloCredentials = prefect_montecarlo.credentials",
+            "MonteCarloCredentials = prefect_monte_carlo.credentials",
         ]
     },
     classifiers=[

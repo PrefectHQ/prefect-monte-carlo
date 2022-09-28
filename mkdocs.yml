@@ -1,6 +1,6 @@
-site_name: prefect-montecarlo
-site_url: https://PrefectHQ.github.io/prefect-montecarlo
-repo_url: https://github.com/PrefectHQ/prefect-montecarlo
+site_name: prefect-monte-carlo
+site_url: https://PrefectHQ.github.io/prefect-monte-carlo
+repo_url: https://github.com/PrefectHQ/prefect-monte-carlo
 edit_uri: /edit/main/docs/
 theme:
   name: material
@@ -43,7 +43,7 @@ plugins:
             show_signature: False
             heading_level: 1
       watch:
-        - prefect_montecarlo/
+        - prefect_monte-carlo/
         - README.md
 
 nav:

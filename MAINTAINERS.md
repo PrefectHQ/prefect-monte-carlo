@@ -1,4 +1,4 @@
-# prefect-montecarlo
+# prefect-monte-carlo
 
 ## Getting Started
 
@@ -29,13 +29,13 @@ https://github.com/organizations/PrefectHQ/repositories/new
 
 Upon creation, push the repository to GitHub:
 ```bash
-git remote add origin https://github.com/PrefectHQ/prefect-montecarlo.git
+git remote add origin https://github.com/PrefectHQ/prefect-monte-carlo.git
 git branch -M main
 git push -u origin main
 ```
 
 It's recommended to setup some protection rules for main at:
-https://github.com/PrefectHQ/prefect-montecarlo/settings/branches
+https://github.com/PrefectHQ/prefect-monte-carlo/settings/branches
 
 - Require a pull request before merging
 - Require approvals
@@ -76,7 +76,7 @@ This collection has been setup to with [mkdocs](https://www.mkdocs.org/) for aut
 To add a new page for a module in your collection, create a new markdown file in the `docs` directory and add that file to the `nav` section of `mkdocs.yml`. If you want to automatically generate documentation based on the docstrings and signatures of the contents of the module with `mkdocstrings`, add a line to the new markdown file in the following format:
 
 ```markdown
-::: prefect_montecarlo.{module_name}
+::: prefect_monte_carlo.{module_name}
 ```
 
 You can also refer to the `flows.md` and `tasks.md` files included in your generated project as examples.
@@ -103,7 +103,7 @@ Once you've obtained a PyPI API token, [create a GitHub secret](https://docs.git
 
 To create publish a new version of your collection, [create a new GitHub release](https://docs.github.com/en/repositories/releasing-projects-on-github/managing-releases-in-a-repository#creating-a-release) and tag it with the version that you want to deploy (e.g. v0.3.2). This will trigger workflow to publish the new version on PyPI and deploy the updated docs to GitHub pages.
 
-Upon publishing, a `docs` branch is automatically created. To hook this up to GitHub Pages, simply head over to https://github.com/PrefectHQ/prefect-montecarlo/settings/pages, select `docs` under the dropdown menu, keep the default `/root` folder, `Save`, and upon refresh, you should see a prompt stating "Your site is published at https://PrefectHQ.github.io/prefect-montecarlo". Don't forget to add this link to the repo's "About" section, under "Website" so users can access the docs easily.
+Upon publishing, a `docs` branch is automatically created. To hook this up to GitHub Pages, simply head over to https://github.com/PrefectHQ/prefect-monte-carlo/settings/pages, select `docs` under the dropdown menu, keep the default `/root` folder, `Save`, and upon refresh, you should see a prompt stating "Your site is published at https://PrefectHQ.github.io/prefect-monte-carlo". Don't forget to add this link to the repo's "About" section, under "Website" so users can access the docs easily.
 
 Feel free to [submit your collection](https://orion-docs.prefect.io/collections/overview/#listing-in-the-collections-catalog) to the Prefect [Collections Catalog](https://orion-docs.prefect.io/collections/catalog/)!
 

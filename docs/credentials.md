@@ -1,1 +1,1 @@
-::: prefect_montecarlo.credentials
+::: prefect_monte_carlo.credentials
