@@ -27,21 +27,21 @@ class MontecarloCredentials(Block):
         default=...,
         description="The token to authenticate with Montecarlo's GraphQL API.",
     )
-    
+
     api_token_id: SecretStr = Field(
         default=...,
         description="The ID associated with the Montecarlo API token.",
     )
-    
+
     async def get_client(self) -> Client:
         """
-        Gets an authenticated Montecarlo GraphQL RequestsEndpoint.
+        Gets an authenticated Montecarlo GraphQL client via pycarlo.
 
         Returns:
-            An authenticated Montecarlo GraphQL RequestsEndpoint
+            An authenticated Montecarlo GraphQL client
 
         Example:
-            Gets an authenticated Montecarlo GraphQL RequestsEndpoint.
+            Gets an authenticated Montecarlo GraphQL client.
             ```python
             from prefect import flow
             from prefect_montecarlo import execute_graphql_query
@@ -54,13 +54,13 @@ class MontecarloCredentials(Block):
                 )
                 result = execute_graphql_query(
                     montecarlo_credentials=montecarlo_credentials,
-                    query="query getUser {  getUser {    email   firstName    lastName  }}",
+                    query="query getUser { getUser { email firstName lastName }}",
                 )
 
             example_execute_query()
             ```
         """
-        
+
         return Client(
             session=Session(
                 mcd_id=self.api_token_id.get_secret_value(),

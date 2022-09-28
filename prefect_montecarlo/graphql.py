@@ -1,6 +1,11 @@
-from prefect import task
-from prefect_montecarlo.credentials import MontecarloCredentials
+"""Module for GraphQL queries and mutations."""
+
 from typing import Dict, Optional
+
+from prefect import task
+
+from prefect_montecarlo.credentials import MontecarloCredentials
+
 
 @task
 async def execute_graphql_query(
@@ -12,7 +17,8 @@ async def execute_graphql_query(
     Executes a GraphQL query against the Montecarlo GraphQL API.
 
     Args:
-        montecarlo_credentials: the credentials to authenticate with the Montecarlo GraphQL API.
+        montecarlo_credentials: credentials to authenticate with the
+            Montecarlo GraphQL API.
         query: the GraphQL query to execute.
         variables: the variables to pass to the GraphQL query.
 
@@ -38,7 +44,7 @@ async def execute_graphql_query(
 
         example_execute_query()
         ```
-        
+
         Executes a GraphQL query with variables.
         ```python
         from prefect import flow
@@ -62,13 +68,13 @@ async def execute_graphql_query(
 
         @flow
         def test_mc():
-            
+
             result = execute_graphql_query(
                 montecarlo_credentials=mc_creds,
                 query=query,
                 variables={"first":10}
             )
-            
+
         if __name__ == "__main__":
             test_mc()
         ```
