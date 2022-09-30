@@ -10,11 +10,13 @@ async def test_execute_graphql_query_no_vars(
     sample_get_tables_query_response,
     mock_successful_get_tables_query_response,
 ):
+    test_query = "query getTables { getTables { edges { node { fullTableId } } } }"
+
     @flow
     async def test_flow():
         return await execute_graphql_operation(
             montecarlo_credentials=montecarlo_credentials,
-            operation="query getTables { getTables { edges { node { fullTableId } } } }",
+            operation=test_query,
         )
 
     result = await test_flow()
