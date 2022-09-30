@@ -9,7 +9,7 @@ from prefect_monte_carlo.credentials import MonteCarloCredentials
 
 @task
 async def execute_graphql_operation(
-    montecarlo_credentials: MonteCarloCredentials,
+    monte_carlo_credentials: MonteCarloCredentials,
     operation: str,
     variables: Optional[Dict] = None,
 ) -> Dict[str, Any]:
@@ -80,5 +80,5 @@ async def execute_graphql_operation(
             test_mc()
         ```
     """
-    client = montecarlo_credentials.get_client()
+    client = monte_carlo_credentials.get_client()
     return client(operation, variables=variables)

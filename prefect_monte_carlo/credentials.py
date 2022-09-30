@@ -66,7 +66,7 @@ class MonteCarloCredentials(Block):
 
         return Client(
             session=Session(
-                mcd_id=self.api_key.get_secret_value(),
-                mcd_token=self.api_key_id,
+                mcd_id=self.api_key_id,
+                mcd_token=self.api_key.get_secret_value(),
             )
         )
