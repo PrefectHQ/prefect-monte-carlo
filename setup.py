@@ -30,7 +30,7 @@ setup(
     extras_require={"dev": dev_requires},
     entry_points={
         "prefect.collections": [
-            "prefect-monte-carlo = prefect_monte_carlo",
+            "prefect_monte_carlo = prefect_monte_carlo",
         ]
     },
     classifiers=[
