@@ -10,7 +10,8 @@ class MonteCarloCredentials(Block):
     Block used to manage Monte Carlo authentication.
 
     Attributes:
-        token: the token to authenticate into Monte Carlo.
+        api_key: The Monte Carlo API key to authenticate with.
+        api_key_id: The Monte Carlo API key ID to authenticate with.
 
     Examples:
         Load stored Monte Carlo credentials:
@@ -21,19 +22,21 @@ class MonteCarloCredentials(Block):
     """
 
     _block_type_name = "Monte Carlo Credentials"
-    _logo_url = "https://images.g2crowd.com/uploads/product/image/large_detail/large_detail_77e7b92d230439f18a97440a32be055e/monte-carlo.png"  # noqa
+    _logo_url = "https://images.ctfassets.net/gm98wzqotmnx/5OqrPNRdLMvqZzxo9f6Z25/f920dff0f1201fc014b0b083a6d2fdb1/image.png?h=250"  # noqa
 
-    api_token: SecretStr = Field(
+    api_key: SecretStr = Field(
         default=...,
+        title="API Key",
         description="The token to authenticate with Monte Carlo's GraphQL API.",
     )
 
-    api_token_id: SecretStr = Field(
+    api_key_id: str = Field(
         default=...,
+        title="API Key ID",
         description="The ID associated with the Monte Carlo API token.",
     )
 
-    async def get_client(self) -> Client:
+    def get_client(self) -> Client:
         """
         Gets an authenticated Monte Carlo GraphQL client via pycarlo.
 
@@ -63,7 +66,7 @@ class MonteCarloCredentials(Block):
 
         return Client(
             session=Session(
-                mcd_id=self.api_token_id.get_secret_value(),
-                mcd_token=self.api_token.get_secret_value(),
+                mcd_id=self.api_key.get_secret_value(),
+                mcd_token=self.api_key_id,
             )
         )

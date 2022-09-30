@@ -9,8 +9,8 @@ from prefect_monte_carlo.credentials import MonteCarloCredentials
 @pytest.fixture
 def montecarlo_credentials():
     return MonteCarloCredentials(
-        api_token="test-token",
-        api_token_id="test-token-id",
+        api_key="test-token",
+        api_key_id="test-token-id",
     )
 
 

@@ -30,7 +30,7 @@ setup(
     extras_require={"dev": dev_requires},
     entry_points={
         "prefect.collections": [
-            "MonteCarloCredentials = prefect_monte_carlo.credentials",
+            "prefect-monte-carlo = prefect_monte_carlo",
         ]
     },
     classifiers=[

@@ -2,7 +2,7 @@ import pytest
 from prefect import flow
 from pycarlo.common.errors import GqlError
 
-from prefect_monte_carlo.graphql import execute_graphql_query
+from prefect_monte_carlo.graphql import execute_graphql_operation
 
 
 async def test_execute_graphql_query_no_vars(
@@ -12,9 +12,9 @@ async def test_execute_graphql_query_no_vars(
 ):
     @flow
     async def test_flow():
-        return await execute_graphql_query(
+        return await execute_graphql_operation(
             montecarlo_credentials=montecarlo_credentials,
-            query="query getTables { getTables { edges { node { fullTableId } } } }",
+            operation="query getTables { getTables { edges { node { fullTableId } } } }",
         )
 
     result = await test_flow()
@@ -39,9 +39,9 @@ async def test_execute_graphql_query_with_bad_vars(
                 }
             }
         """
-        return await execute_graphql_query(
+        return await execute_graphql_operation(
             montecarlo_credentials=montecarlo_credentials,
-            query=query,
+            operation=query,
             variables=variables,
         )
 
