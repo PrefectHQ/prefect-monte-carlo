@@ -1,2 +1,3 @@
 include versioneer.py
 include prefect_monte_carlo/_version.py
+include prefect_monte_carlo/configs/*/*.json

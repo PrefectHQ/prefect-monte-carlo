@@ -38,7 +38,7 @@ Install `prefect-monte-carlo` with `pip`:
 pip install prefect-monte-carlo
 ```
 
-Then, register to [view the block](https://orion-docs.prefect.io/ui/blocks/) on Prefect Cloud:
+Then, register this collection's blocks to [view them on Prefect Cloud](https://orion-docs.prefect.io/ui/blocks/):
 
 ```bash
 prefect block register -m prefect_monte_carlo.credentials
@@ -50,18 +50,20 @@ Note, to use the `load` method on Blocks, you must already have a block document
 
 ```python
 from prefect import flow
-from prefect_monte_carlo.tasks import (
-    goodbye_prefect_monte_carlo,
-    hello_prefect_monte_carlo,
-)
-
+from prefect_monte_carlo import execute_graphql_operation
+from prefect_monte_carlo.credentials import MonteCarloCredentials
 
 @flow
-def example_flow():
-    hello_prefect_monte_carlo
-    goodbye_prefect_monte_carlo
+def example_execute_query():
+    montecarlo_credentials = MonteCarloCredentials.load(
+        "my-montecarlo-credentials"
+    )
+    result = execute_graphql_operation(
+        montecarlo_credentials=montecarlo_credentials,
+        operation="query getUser { getUser { email firstName lastName }}",
+    )
 
-example_flow()
+example_execute_query()
 ```
 
 ## Resources

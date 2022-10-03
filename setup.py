@@ -13,10 +13,10 @@ with open("README.md") as readme_file:
 
 setup(
     name="prefect-monte-carlo",
-    description="A collection of Prefect tasks and flows to orchestrate Monte Carlo",
+    description="Prefect integrations for interacting with Monte Carlo.",
     license="Apache License 2.0",
     author="Prefect Technologies",
-    author_email="nate@prefect.io",
+    author_email="help@prefect.io",
     keywords="prefect",
     url="https://github.com/PrefectHQ/prefect-monte-carlo",
     long_description=readme,
@@ -26,7 +26,13 @@ setup(
     packages=find_packages(exclude=("tests", "docs")),
     python_requires=">=3.7",
     install_requires=install_requires,
+    include_package_data=True,
     extras_require={"dev": dev_requires},
+    entry_points={
+        "prefect.collections": [
+            "prefect_monte_carlo = prefect_monte_carlo",
+        ]
+    },
     classifiers=[
         "Natural Language :: English",
         "Intended Audience :: Developers",
