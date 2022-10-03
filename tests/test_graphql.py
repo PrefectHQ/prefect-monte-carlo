@@ -5,7 +5,7 @@ from pycarlo.common.errors import GqlError
 from prefect_monte_carlo.graphql import execute_graphql_operation
 
 
-async def test_execute_graphql_query_no_vars(
+async def test_execute_graphql_op_no_vars(
     monte_carlo_credentials,
     sample_get_tables_query_response,
     mock_successful_get_tables_query_response,
@@ -25,7 +25,7 @@ async def test_execute_graphql_query_no_vars(
 
 
 @pytest.mark.parametrize("variables", [{"second": 10}, None])
-async def test_execute_graphql_query_with_bad_vars(
+async def test_execute_graphql_op_with_bad_vars(
     monte_carlo_credentials, variables, mock_bad_variable_get_tables_query_response
 ):
     @flow

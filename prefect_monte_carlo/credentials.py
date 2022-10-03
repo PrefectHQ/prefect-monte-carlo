@@ -47,7 +47,7 @@ class MonteCarloCredentials(Block):
             Gets an authenticated Monte Carlo GraphQL client.
             ```python
             from prefect import flow
-            from prefect_monte_carlo import execute_graphql_query
+            from prefect_monte_carlo import execute_graphql_operation
             from prefect_monte_carlo.credentials import MonteCarloCredentials
 
             @flow
@@ -55,7 +55,7 @@ class MonteCarloCredentials(Block):
                 montecarlo_credentials = MonteCarloCredentials.load(
                     "my-montecarlo-credentials"
                 )
-                result = execute_graphql_query(
+                result = execute_graphql_operation(
                     montecarlo_credentials=montecarlo_credentials,
                     query="query getUser { getUser { email firstName lastName }}",
                 )
