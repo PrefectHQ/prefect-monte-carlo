@@ -38,6 +38,15 @@ Install `prefect-monte-carlo` with `pip`:
 pip install prefect-monte-carlo
 ```
 
+Then, register this collection's blocks to [view them on Prefect Cloud](https://orion-docs.prefect.io/ui/blocks/):
+
+```bash
+prefect block register -m prefect_monte_carlo.credentials
+```
+
+Note, to use the `load` method on Blocks, you must already have a block document [saved through code](https://orion-docs.prefect.io/concepts/blocks/#saving-blocks) or [saved through the UI](https://orion-docs.prefect.io/ui/blocks/).
+
+
 ### Write and run a flow
 
 ```python
