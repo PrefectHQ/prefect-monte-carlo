@@ -41,7 +41,7 @@ class MonteCarloCredentials(Block):
         Gets an authenticated Monte Carlo GraphQL client via pycarlo.
 
         Returns:
-            An authenticated Monte Carlo GraphQL client
+            An authenticated Monte Carlo GraphQL client.
 
         Example:
             Gets an authenticated Monte Carlo GraphQL client.

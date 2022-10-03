@@ -17,11 +17,11 @@ async def execute_graphql_operation(
     Executes a GraphQL operation via the Monte Carlo GraphQL API.
 
     Args:
-        montecarlo_credentials: credentials to authenticate with the
+        montecarlo_credentials: Credentials to authenticate with the
             Monte Carlo GraphQL API.
-        operation: the GraphQL operation to execute - it can be a valid GraphQL
+        operation: The GraphQL operation to execute - it can be a valid GraphQL
             query or mutation.
-        variables: the variables to pass to the GraphQL operation.
+        variables: The variables to pass to the GraphQL operation.
 
     Returns:
         The results of the GraphQL operation.
