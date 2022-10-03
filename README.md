@@ -46,7 +46,6 @@ prefect block register -m prefect_monte_carlo.credentials
 
 Note, to use the `load` method on Blocks, you must already have a block document [saved through code](https://orion-docs.prefect.io/concepts/blocks/#saving-blocks) or [saved through the UI](https://orion-docs.prefect.io/ui/blocks/).
 
-
 ### Write and run a flow
 
 ```python
