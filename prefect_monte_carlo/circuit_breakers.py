@@ -22,7 +22,7 @@ async def circuit_breaker(
         monte_carlo_credentials: The Monte Carlo credentials block used to
             generate an authenticated GraphQL API client.
         rule_uuid: UUID of the rule (custom SQL monitor) to execute.
-        rule_name: name of the rule (custom SQL monitor) to execute.
+        rule_name: Name of the rule (custom SQL monitor) to execute.
         namespace: Namespace of the rule (custom SQL monitor) to execute.
 
     Raises:
