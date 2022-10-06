@@ -1,31 +1,41 @@
 """Module for GraphQL queries and mutations."""
 
-from typing import Any, Dict, Optional
+from typing import Any, Dict, List, Optional
 from uuid import UUID
 
+from box import Box, BoxList
 from prefect import task
 from pycarlo.common.errors import GqlError
 
 from prefect_monte_carlo.credentials import MonteCarloCredentials
 
 
-async def rule_uuid_from_name(
-    rule_name: str,
-    monte_carlo_credentials: MonteCarloCredentials,
-) -> UUID:
-    """Get the UUID of a Monte Carlo SQL monitor rule from its name."""
-    query = f"""
-        query {{
-            getCustomRule (
-                descriptionContains: "{rule_name}"
-        ) {{ uuid }}
-    }}
+@task
+async def get_resources(monte_carlo_credentials: MonteCarloCredentials) -> BoxList:
+    """Task to retrieve all Monte Carlo resources.
+
+    Args:
+        monte_carlo_credentials: The Monte Carlo credentials block used to generate
+            an authenticated GraphQL API client via pycarlo.
+
+    Returns:
+        A `BoxList` of all Monte Carlo resources.
     """
-    try:
-        client = monte_carlo_credentials.get_client()
-        return UUID(client(query).get_custom_rule.uuid)
-    except GqlError:
-        raise
+
+    client = monte_carlo_credentials.get_client()
+    query = """
+        query {
+            getResources {
+                name
+                type
+                id
+                uuid
+                isDefault
+                isUserProvided
+            }
+        }
+    """
+    return client(query).get_resources
 
 
 @task
@@ -33,7 +43,7 @@ async def execute_graphql_operation(
     monte_carlo_credentials: MonteCarloCredentials,
     operation: str,
     variables: Optional[Dict] = None,
-) -> Dict[str, Any]:
+) -> Box:
     """
     Executes a GraphQL operation via the Monte Carlo GraphQL API.
 
@@ -45,7 +55,8 @@ async def execute_graphql_operation(
         variables: The variables to pass to the GraphQL operation.
 
     Returns:
-        The results of the GraphQL operation.
+        The results of the GraphQL operation as a Box object. See
+        [the python-box docs](https://pypi.org/project/python-box/).
 
     Example:
         Executes a simple GraphQL query against the Monte Carlo GraphQL API.
