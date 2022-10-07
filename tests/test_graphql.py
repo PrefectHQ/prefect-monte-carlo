@@ -6,7 +6,7 @@ from prefect_monte_carlo.graphql import execute_graphql_operation
 
 
 async def test_execute_graphql_op_no_vars(
-    monte_carlo_credentials,
+    monte_carlo_creds,
     sample_get_tables_query_response,
     mock_successful_get_tables_query_response,
 ):
@@ -15,7 +15,7 @@ async def test_execute_graphql_op_no_vars(
     @flow
     async def test_flow():
         return await execute_graphql_operation(
-            monte_carlo_credentials=monte_carlo_credentials,
+            monte_carlo_credentials=monte_carlo_creds,
             operation=test_query,
         )
 
@@ -26,7 +26,7 @@ async def test_execute_graphql_op_no_vars(
 
 @pytest.mark.parametrize("variables", [{"second": 10}, None])
 async def test_execute_graphql_op_with_bad_vars(
-    monte_carlo_credentials, variables, mock_bad_variable_get_tables_query_response
+    monte_carlo_creds, variables, mock_bad_operation_response
 ):
     @flow
     async def test_flow():
@@ -42,7 +42,7 @@ async def test_execute_graphql_op_with_bad_vars(
             }
         """
         return await execute_graphql_operation(
-            monte_carlo_credentials=monte_carlo_credentials,
+            monte_carlo_credentials=monte_carlo_creds,
             operation=query,
             variables=variables,
         )

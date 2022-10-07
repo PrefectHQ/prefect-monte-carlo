@@ -4,7 +4,6 @@ from typing import Any, Dict, Optional
 from uuid import UUID
 
 from prefect import task
-from pycarlo.common.errors import GqlError
 
 from prefect_monte_carlo.credentials import MonteCarloCredentials
 
@@ -13,7 +12,7 @@ async def rule_uuid_from_name(
     rule_name: str,
     monte_carlo_credentials: MonteCarloCredentials,
 ) -> UUID:
-    """Get the UUID of a Monte Carlo SQL monitor rule from its name."""
+    """Get the UUID of a Monte Carlo monitor rule from its name."""
     query = f"""
         query {{
             getCustomRule (
@@ -21,11 +20,8 @@ async def rule_uuid_from_name(
         ) {{ uuid }}
     }}
     """
-    try:
-        client = monte_carlo_credentials.get_client()
-        return UUID(client(query).get_custom_rule.uuid)
-    except GqlError:
-        raise
+    client = monte_carlo_credentials.get_client()
+    return client(query).get_custom_rule.uuid
 
 
 @task
