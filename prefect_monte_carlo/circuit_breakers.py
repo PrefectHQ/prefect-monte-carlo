@@ -13,9 +13,13 @@ from prefect_monte_carlo.credentials import MonteCarloCredentials
 from prefect_monte_carlo.graphql import rule_uuid_from_name
 
 
-def skip_if_circuit_breaker_flipped(**monitor_rule_kwargs):
+def skip_if_circuit_breaker_flipped(
+    monte_carlo_credentials: MonteCarloCredentials,
+    rule_uuid: Optional[UUID] = None,
+    rule_name: Optional[str] = None,
+):
     """Decorator to run a user-defined flow only if a given Monte Carlo
-    SQL monitor rule is not breached.
+    monitor rule is not breached.
 
     This decorator must be placed between your `@flow` decorator and
     the python function that defines your flow.
@@ -23,8 +27,8 @@ def skip_if_circuit_breaker_flipped(**monitor_rule_kwargs):
     Args:
         monte_carlo_credentials: The credentials to use to generate an
             authenticated Monte Carlo GraphQL client via PyCarlo.
-        rule_uuid (optional): The UUID of the monitor rule to check.
-        rule_name (optional): The name of the monitor rule to check.
+        rule_uuid: The UUID of the monitor rule to check.
+        rule_name: The name of the monitor rule to check.
 
     Examples:
         Define a flow that will only run if `my_monitor_rule` is not breached:
@@ -55,6 +59,11 @@ def skip_if_circuit_breaker_flipped(**monitor_rule_kwargs):
             print("I will only print if `my_monitor_rule` is not breached.")
         ```
     """
+    monitor_rule_kwargs = dict(
+        rule_name=rule_name,
+        rule_uuid=rule_uuid,
+        monte_carlo_credentials=monte_carlo_credentials,
+    )
 
     def decorator(func):
         """Layer to catch the function being decorated."""
@@ -105,7 +114,7 @@ async def circuit_breaker_is_flipped(
     Returns:
         `True` if the rule is breached, `False` otherwise.
 
-    Examples:
+    Example:
         Check if a rule is breached by UUID:
         ```python
         from prefect import flow
@@ -129,7 +138,7 @@ async def circuit_breaker_is_flipped(
                 return Cancelled(message="Monitor rule breached - cancelling flow run.")
 
             do_something_if_not_breached()
-            ```
+        ```
     """
     monte_carlo_client = monte_carlo_credentials.get_client()
 
