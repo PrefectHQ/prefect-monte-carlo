@@ -159,6 +159,23 @@ async def test_invalid_rule_reference_none_passed(
         test_flow()
 
 
+async def test_invalid_rule_reference_both_passed(
+    mock_monte_carlo_creds,
+    random_uuid,
+):
+    @flow
+    @skip_if_circuit_breaker_flipped(
+        monte_carlo_credentials=mock_monte_carlo_creds,
+        rule_uuid=random_uuid,
+        rule_name="test_rule",
+    )
+    def test_flow():
+        pass
+
+    with pytest.raises(ValueError):
+        test_flow()
+
+
 async def test_invalid_rule_reference_bad_uuid(
     mock_monte_carlo_creds,
 ):

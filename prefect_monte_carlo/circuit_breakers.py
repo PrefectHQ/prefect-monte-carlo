@@ -142,15 +142,13 @@ async def circuit_breaker_is_flipped(
     """
     monte_carlo_client = monte_carlo_credentials.get_client()
 
-    if not (rule_uuid or rule_name):
-        raise ValueError("Must pass either `rule_uuid` OR `rule_name`")
+    if not (bool(rule_uuid) ^ bool(rule_name)):
+        raise ValueError(
+            "Please provide either `rule_uuid` or `rule_name`, but not both"
+        )
 
     if rule_uuid:
-        try:
-            rule_uuid = UUID(rule_uuid)
-        except ValueError:
-            raise
-
+        rule_uuid = UUID(rule_uuid)
     else:
         rule_uuid = await rule_uuid_from_name(
             rule_name=rule_name,
