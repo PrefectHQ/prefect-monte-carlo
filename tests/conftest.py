@@ -73,7 +73,7 @@ def mock_breach_of_rule(monkeypatch):
 
 
 @pytest.fixture
-def mock_bad_operation(monkeypatch):
+def mock_bad_operation_response(monkeypatch):
     monkeypatch.setattr(
         "pycarlo.core.Client.__call__",
         MagicMock(side_effect=GqlError),

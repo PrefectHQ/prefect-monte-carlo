@@ -173,7 +173,9 @@ async def test_invalid_rule_reference_bad_uuid(
         test_flow()
 
 
-async def test_ambiguous_rule_name_passed(monte_carlo_creds, mock_bad_operation):
+async def test_ambiguous_rule_name_passed(
+    monte_carlo_creds, mock_bad_operation_response
+):
     @flow
     @skip_if_circuit_breaker_flipped(
         rule_name="duplicate_name", monte_carlo_credentials=monte_carlo_creds
