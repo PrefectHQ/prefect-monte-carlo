@@ -55,11 +55,11 @@ from prefect_monte_carlo.credentials import MonteCarloCredentials
 
 @flow
 def example_execute_query():
-    montecarlo_credentials = MonteCarloCredentials.load(
+    monte_carlo_credentials = MonteCarloCredentials.load(
         "my-montecarlo-credentials"
     )
     result = execute_graphql_operation(
-        montecarlo_credentials=montecarlo_credentials,
+        monte_carlo_credentials=monte_carlo_credentials,
         operation="query getUser { getUser { email firstName lastName }}",
     )
 

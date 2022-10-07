@@ -13,10 +13,10 @@ class MonteCarloCredentials(Block):
         api_key: The Monte Carlo API key to authenticate with.
         api_key_id: The Monte Carlo API key ID to authenticate with.
 
-    Examples:
+    Example:
         Load stored Monte Carlo credentials:
         ```python
-        from prefect_monte_carlo import MonteCarloCredentials
+        from prefect_monte_carlo.credentials import MonteCarloCredentials
         montecarlo_credentials_block = MonteCarloCredentials.load("BLOCK_NAME")
         ```
     """
@@ -47,16 +47,16 @@ class MonteCarloCredentials(Block):
             Gets an authenticated Monte Carlo GraphQL client.
             ```python
             from prefect import flow
-            from prefect_monte_carlo import execute_graphql_operation
+            from prefect_monte_carlo.graphql import execute_graphql_operation
             from prefect_monte_carlo.credentials import MonteCarloCredentials
 
             @flow
             def example_execute_query():
-                montecarlo_credentials = MonteCarloCredentials.load(
+                monte_carlo_credentials = MonteCarloCredentials.load(
                     "my-montecarlo-credentials"
                 )
                 result = execute_graphql_operation(
-                    montecarlo_credentials=montecarlo_credentials,
+                    monte_carlo_credentials=monte_carlo_credentials,
                     query="query getUser { getUser { email firstName lastName }}",
                 )
 

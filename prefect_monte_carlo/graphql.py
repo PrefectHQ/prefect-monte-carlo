@@ -1,8 +1,8 @@
 """Module for GraphQL queries and mutations."""
-
-from typing import Any, Dict, Optional
+from typing import Dict, Optional
 from uuid import UUID
 
+import box
 from prefect import task
 
 from prefect_monte_carlo.credentials import MonteCarloCredentials
@@ -12,7 +12,14 @@ async def rule_uuid_from_name(
     rule_name: str,
     monte_carlo_credentials: MonteCarloCredentials,
 ) -> UUID:
-    """Get the UUID of a Monte Carlo monitor rule from its name."""
+    """Get the UUID of a Monte Carlo monitor rule from its name.
+
+
+    Args:
+        rule_name: Name of the Monte Carlo monitor rule.
+        monte_carlo_credentials: Credentials
+            to authenticate with the Monte Carlo GraphQL API.
+    """
     query = f"""
         query {{
             getCustomRule (
@@ -29,19 +36,19 @@ async def execute_graphql_operation(
     monte_carlo_credentials: MonteCarloCredentials,
     operation: str,
     variables: Optional[Dict] = None,
-) -> Dict[str, Any]:
+) -> box.Box:
     """
     Executes a GraphQL operation via the Monte Carlo GraphQL API.
 
     Args:
-        montecarlo_credentials: Credentials to authenticate with the
-            Monte Carlo GraphQL API.
+        monte_carlo_credentials: Credentials
+            to authenticate with the Monte Carlo GraphQL API.
         operation: The GraphQL operation to execute - it can be a valid GraphQL
             query or mutation.
         variables: The variables to pass to the GraphQL operation.
 
     Returns:
-        The results of the GraphQL operation.
+        The results of the GraphQL operation as a `box.Box` object.
 
     Example:
         Executes a simple GraphQL query against the Monte Carlo GraphQL API.
@@ -52,11 +59,11 @@ async def execute_graphql_operation(
 
         @flow
         def example_execute_query():
-            montecarlo_credentials = MonteCarloCredentials.load(
+            monte_carlo_credentials = MonteCarloCredentials.load(
                 "my-montecarlo-credentials"
             )
             result = execute_graphql_operation(
-                montecarlo_credentials=montecarlo_credentials,
+                monte_carlo_credentials=monte_carlo_credentials,
                 operation="query getUser { getUser { email firstName lastName }}",
             )
 
@@ -88,7 +95,7 @@ async def execute_graphql_operation(
         def test_mc():
 
             result = execute_graphql_operation(
-                montecarlo_credentials=mc_creds,
+                monte_carlo_credentials=mc_creds,
                 operation=query,
                 variables={"first":10}
             )

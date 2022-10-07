@@ -1,4 +1,4 @@
-""" Module for interacting with Monte Carlo circuit breakers / SQL monitor rules. """
+""" Module for interacting with Monte Carlo circuit breakers / monitor rules. """
 import functools
 from typing import Optional
 from uuid import UUID
@@ -21,13 +21,13 @@ def skip_if_circuit_breaker_flipped(**monitor_rule_kwargs):
     the python function that defines your flow.
 
     Args:
-        - monte_carlo_credentials: The credentials to use to generate an
+        monte_carlo_credentials: The credentials to use to generate an
             authenticated Monte Carlo GraphQL client via PyCarlo.
-        - rule_uuid (optional): The UUID of the monitor rule to check.
-        - rule_name (optional): The name of the monitor rule to check.
+        rule_uuid (optional): The UUID of the monitor rule to check.
+        rule_name (optional): The name of the monitor rule to check.
 
     Examples:
-        - Define a flow that will only run if the `my_monitor_rule` is not breached.
+        Define a flow that will only run if `my_monitor_rule` is not breached:
         ```python
         from prefect import flow
         from prefect_monte_carlo.circuit_breakers import skip_if_circuit_breaker_flipped
@@ -44,7 +44,7 @@ def skip_if_circuit_breaker_flipped(**monitor_rule_kwargs):
             print("I will only print if `my_monitor_rule` is not breached.")
         ```
 
-        - Reference a rule by name:
+        Reference a rule by name:
         ```python
         @flow
         @skip_if_circuit_breaker_flipped(
@@ -103,10 +103,10 @@ async def circuit_breaker_is_flipped(
         ValueError: If an incorrect combination of rule references is passed.
 
     Returns:
-        is_monitor_rule_breached: `True` if the rule is breached, `False` otherwise.
+        `True` if the rule is breached, `False` otherwise.
 
     Examples:
-        - Check if a rule is breached by UUID:
+        Check if a rule is breached by UUID:
         ```python
         from prefect import flow
         from prefect.orion.schemas.states import Cancelled
@@ -117,9 +117,9 @@ async def circuit_breaker_is_flipped(
             pass
 
         @flow
-        def test(we_really_care_about_UUID: bool = False):
+        def conditional_flow():
             # we can also pass `rule_name` instead of rule_uuid
-            rule_uuid = "af6fdb62-7496-4b8b-ba09-38f83a311c17" # or as a UUID
+            rule_uuid = "af6fdb62-7496-4b8b-ba09-38f83a311c17" # or as a UUID object
             if circuit_breaker_is_flipped(
                 monte_carlo_credentials=MonteCarloCredentials.load(
                     "monte-carlo-credentials"
