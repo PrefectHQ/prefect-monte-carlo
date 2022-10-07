@@ -50,3 +50,4 @@ nav:
     - Home: index.md
     - Credentials: credentials.md
     - GraphQL: graphql.md
+    - Circuit Breakers: circuit_breakers.md

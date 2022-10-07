@@ -3,16 +3,23 @@ from uuid import uuid4
 
 import pytest
 from pycarlo.common.errors import GqlError
-from pycarlo.core import Client
 
 from prefect_monte_carlo.credentials import MonteCarloCredentials
 
 
 @pytest.fixture
-def monte_carlo_credentials():
+def mock_monte_carlo_creds():
+    mock_client = MagicMock()
+    mock_creds = MagicMock().get_client.return_value = mock_client
+
+    return mock_creds
+
+
+@pytest.fixture
+def monte_carlo_creds():
     return MonteCarloCredentials(
-        api_key="test-token",
-        api_key_id="test-token-id",
+        api_key="test_api_key",
+        api_key_id="test_api_key_id",
     )
 
 
@@ -50,14 +57,9 @@ def mock_successful_get_tables_query_response(
 
 
 @pytest.fixture
-def mock_bad_variable_get_tables_query_response(monkeypatch):
-    monkeypatch.setattr("pycarlo.core.Client.__call__", MagicMock(side_effect=GqlError))
-
-
-@pytest.fixture
 def mock_no_breach_of_rule(monkeypatch):
     monkeypatch.setattr(
-        "prefect_monte_carlo.circuit_breakers.is_monitor_rule_breached",
+        "prefect_monte_carlo.circuit_breakers.circuit_breaker_is_flipped",
         MagicMock(return_value=False),
     )
 
@@ -65,18 +67,13 @@ def mock_no_breach_of_rule(monkeypatch):
 @pytest.fixture
 def mock_breach_of_rule(monkeypatch):
     monkeypatch.setattr(
-        "prefect_monte_carlo.circuit_breakers.is_monitor_rule_breached",
+        "prefect_monte_carlo.circuit_breakers.circuit_breaker_is_flipped",
         MagicMock(return_value=True),
     )
 
 
 @pytest.fixture
-def mock_ambiguous_rule_name(monkeypatch):
-    monkeypatch.setattr(
-        "prefect_monte_carlo.credentials.MonteCarloCredentials.get_client",
-        MagicMock(return_value=Client()),
-    )
-
+def mock_bad_operation_response(monkeypatch):
     monkeypatch.setattr(
         "pycarlo.core.Client.__call__",
         MagicMock(side_effect=GqlError),
