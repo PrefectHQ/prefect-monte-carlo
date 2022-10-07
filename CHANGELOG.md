@@ -9,6 +9,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- The `skip_if_circuit_breaker_flipped` decorator, underlying task `circuit_breaker_is_flipped`, and their tests. - [#5](https://github.com/PrefectHQ/prefect-monte-carlo/pull/5)
+- The `rule_uuid_from_name` as a convenience method to retrieve rule uuids when names are passed. - [#5](https://github.com/PrefectHQ/prefect-monte-carlo/pull/5)
+
 ### Changed
 
 ### Deprecated
