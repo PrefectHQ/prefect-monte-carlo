@@ -101,6 +101,10 @@ async def circuit_breaker_is_flipped(
 ) -> bool:
     """A task to check if a Monte Carlo circuit breaker / monitor rule is breached.
 
+    If `rule_name` is provided, the task will attempt to fetch the associated
+    `rule_uuid` from the Monte Carlo GraphQL API and use it to trigger the custom
+    rule.
+
     Args:
         monte_carlo_credentials: The Monte Carlo credentials block used to
             generate an authenticated GraphQL API client.
@@ -109,7 +113,7 @@ async def circuit_breaker_is_flipped(
         timeout_in_minutes: How long to wait for SQL rule run logs.
 
     Raises:
-        ValueError: If an incorrect combination of rule references is passed.
+        ValueError: If both (or neither) `rule_uuid` and `rule_name` are provided.
 
     Returns:
         `True` if the rule is breached, `False` otherwise.
