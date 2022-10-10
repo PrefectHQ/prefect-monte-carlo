@@ -78,3 +78,29 @@ def mock_bad_operation_response(monkeypatch):
         "pycarlo.core.Client.__call__",
         MagicMock(side_effect=GqlError),
     )
+
+
+@pytest.fixture
+def mock_circuit_breaker_is_not_flipped(monkeypatch):
+    circuit_breaker_service = MagicMock()
+
+    circuit_breaker_service.trigger.return_value = random_uuid
+    circuit_breaker_service.poll.return_value = 0
+
+    monkeypatch.setattr(
+        "prefect_monte_carlo.circuit_breakers.CircuitBreakerService",
+        MagicMock(return_value=circuit_breaker_service),
+    )
+
+
+@pytest.fixture
+def mock_circuit_breaker_is_flipped(monkeypatch):
+    circuit_breaker_service = MagicMock()
+
+    circuit_breaker_service.trigger.return_value = random_uuid
+    circuit_breaker_service.poll.return_value = 100
+
+    monkeypatch.setattr(
+        "prefect_monte_carlo.circuit_breakers.CircuitBreakerService",
+        MagicMock(return_value=circuit_breaker_service),
+    )
