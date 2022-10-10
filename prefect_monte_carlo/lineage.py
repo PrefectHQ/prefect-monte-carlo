@@ -1,55 +1,108 @@
 """ Module to defines tasks interacting with Monte Carlo lineage resources. """
 
 from datetime import datetime, timedelta
-from typing import Any, Dict, Optional, Union
+from typing import Any, Dict, List, Optional, Union
 
 import box
 from prefect import task
+from prefect.context import get_run_context
+from prefect.exceptions import MissingContextError
 
 from prefect_monte_carlo.credentials import MonteCarloCredentials
 
 
 @task
 def create_or_update_lineage(
+    monte_carlo_credentials: MonteCarloCredentials,
     source: Dict[str, Any],
     destination: Dict[str, Any],
-    monte_carlo_credentials: MonteCarloCredentials,
     expire_at: Optional[str] = None,
 ) -> box.BoxList:
     """Task for creating or updating a lineage node for the given source
     and destination nodes, as well as for creating a lineage edge between those nodes.
 
     Args:
+        monte_carlo_credentials: The Monte Carlo credentials block used to generate
+            an authenticated GraphQL API client via pycarlo.
         source: A source node configuration - expected to include the following
             keys: `node_name`, `object_id`, `object_type`, `resource_name`.
         destination: A destination node configuration - expected to include the
             following keys: `node_name`, `object_id`, `object_type`, `resource_name`,
             and optionally also a list of `tags`.
-        monte_carlo_credentials: The Monte Carlo credentials block used to generate
-            an authenticated GraphQL API client via pycarlo.
         expire_at: Date and time indicating when to expire
             a source-destination edge.
 
     Raises:
-        ValueError: _description_
+        ValueError: If the source or destination node configuration
+            is missing `object_id` or `resource_name`.
 
     Returns:
         box.BoxList: _description_
     """
-    if not (source.get("object_type") and destination.get("object_type")):
+    if not ("object_id" in source and "object_id" in destination):
+        raise ValueError("Source and destination objects must have an `object_id`.")
+
+    if not ("resource_name" in source and "resource_name" in destination):
         raise ValueError(
-            "Source and destination objects must have an `object_type` field."
+            "Must provide a `resource_name` in both source and destination."
         )
+
+    if "object_type" not in source:
+        source["object_type"] = "table"
+
+    if "object_type" not in destination:
+        destination["object_type"] = "table"
+
+    mc_client = monte_carlo_credentials.get_client()
 
 
 @task
-def create_or_update_node_with_tags() -> str:
-    """_summary_
+def create_or_update_lineage_node(
+    monte_carlo_credentials: MonteCarloCredentials,
+    node_name: str,
+    object_id: str,
+    object_type: str,
+    resource_name: str,
+) -> box.Box:
+    """Task for creating or updating a lineage node via the Monte Carlo GraphQL API.
+
+    Args:
+        monte_carlo_credentials: The Monte Carlo credentials block used to generate.
+        node_name: The name of the lineage node.
+        object_id: The object ID of the lineage node.
+        object_type: The object type of the lineage node.
+        resource_name: The resource name of the lineage node.
 
     Returns:
-        str: _description_
+        box.Box: The response from the GraphQL API.
     """
-    pass
+    mc_client = monte_carlo_credentials.get_client()
+
+    response = mc_client(
+        query="""
+        mutation($node_name: String!, $object_id: String!, $object_type: String!,
+        $resource_name: String! ) {
+            createOrUpdateLineageNode(
+            name: $node_name,
+            objectId: $object_id,
+            objectType: $object_type,
+            resourceName: $resource_name,
+            ){
+            node{
+                nodeId
+                mcon
+            }
+            }
+        }
+        """,
+        variables=dict(
+            node_name=node_name,
+            object_id=object_id,
+            object_type=object_type,
+            resource_name=resource_name,
+        ),
+    )
+    return response
 
 
 @task
@@ -153,3 +206,20 @@ def create_or_update_lineage_edge(
     )
 
     return client(query=query, variables=variables)
+
+
+def get_prefect_context_tags() -> List[Dict[str, str]]:
+    """Get the Prefect context tags from the current Prefect context.
+
+    Returns:
+        A list of tags in the format expected by the Monte Carlo GraphQL API.
+    """
+    try:
+        return [  # rudimentary set of tags
+            dict(propertyName=key, propertyValue=value)
+            for key, value in get_run_context().flow_run.dict().items()
+            if isinstance(value, str)
+        ]
+    except MissingContextError:
+        # TODO: Log a warning here?
+        raise
