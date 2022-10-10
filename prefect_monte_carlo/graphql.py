@@ -9,7 +9,9 @@ from prefect_monte_carlo.credentials import MonteCarloCredentials
 
 
 @task
-async def get_resources(monte_carlo_credentials: MonteCarloCredentials) -> box.BoxList:
+async def get_monte_carlo_resources(
+    monte_carlo_credentials: MonteCarloCredentials,
+) -> box.BoxList:
     """Task to retrieve all Monte Carlo resources.
     Args:
         monte_carlo_credentials: The Monte Carlo credentials block used to generate
