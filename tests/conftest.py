@@ -93,7 +93,7 @@ def mock_monte_carlo_resources():
                 "is_default": False,
                 "is_user_provided": True,
             },
-        ]  # noqa
+        ]
     )
 
 
