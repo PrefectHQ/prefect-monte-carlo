@@ -1,5 +1,5 @@
 """Module for GraphQL queries and mutations."""
-from typing import Any, Dict, List, Optional
+from typing import Dict, Optional
 from uuid import UUID
 
 import box
@@ -9,7 +9,7 @@ from prefect_monte_carlo.credentials import MonteCarloCredentials
 
 
 @task
-async def get_resources(monte_carlo_credentials: MonteCarloCredentials) -> BoxList:
+async def get_resources(monte_carlo_credentials: MonteCarloCredentials) -> box.BoxList:
     """Task to retrieve all Monte Carlo resources.
 
     Args:
@@ -17,7 +17,7 @@ async def get_resources(monte_carlo_credentials: MonteCarloCredentials) -> BoxLi
             an authenticated GraphQL API client via pycarlo.
 
     Returns:
-        A `BoxList` of all Monte Carlo resources.
+        A `box.BoxList` of all Monte Carlo resources.
     """
 
     client = monte_carlo_credentials.get_client()

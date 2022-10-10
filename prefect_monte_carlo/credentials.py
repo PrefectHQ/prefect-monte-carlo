@@ -1,5 +1,7 @@
 """Credential classes used to perform authenticated interactions with Monte Carlo"""
 
+from typing import Optional
+
 from prefect.blocks.core import Block
 from pycarlo.core import Client, Session
 from pydantic import Field, SecretStr
@@ -34,6 +36,12 @@ class MonteCarloCredentials(Block):
         default=...,
         title="API Key ID",
         description="The ID associated with the Monte Carlo API token.",
+    )
+
+    catalog_url: Optional[str] = Field(
+        default="https://getmontecarlo.com/catalog",
+        title="Monte Carlo catalog URL",
+        description="The URL of the Monte Carlo catalog.",
     )
 
     def get_client(self) -> Client:
