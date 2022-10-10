@@ -33,7 +33,7 @@ async def get_monte_carlo_resources(
             }
         }
     """
-    return client(query).get_resources
+    return client(query)
 
 
 async def rule_uuid_from_name(
