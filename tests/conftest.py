@@ -3,6 +3,7 @@ from uuid import uuid4
 
 import pytest
 from pycarlo.common.errors import GqlError
+from pycarlo.features.circuit_breakers.exceptions import CircuitBreakerPollException
 
 from prefect_monte_carlo.credentials import MonteCarloCredentials
 
@@ -103,4 +104,12 @@ def mock_circuit_breaker_is_flipped(monkeypatch):
     monkeypatch.setattr(
         "prefect_monte_carlo.circuit_breakers.CircuitBreakerService",
         MagicMock(return_value=circuit_breaker_service),
+    )
+
+
+@pytest.fixture
+def mock_failed_polling(monkeypatch):
+    monkeypatch.setattr(
+        "prefect_monte_carlo.circuit_breakers.CircuitBreakerService.poll",
+        MagicMock(side_effect=CircuitBreakerPollException),
     )
