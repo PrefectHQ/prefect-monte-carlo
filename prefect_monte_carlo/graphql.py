@@ -12,7 +12,9 @@ from prefect_monte_carlo.credentials import MonteCarloCredentials
 async def get_monte_carlo_resources(
     monte_carlo_credentials: MonteCarloCredentials,
 ) -> box.BoxList:
-    """Task to retrieve all Monte Carlo resources.
+    """
+    Task to retrieve all Monte Carlo resources.
+
     Args:
         monte_carlo_credentials: The Monte Carlo credentials block used to generate
             an authenticated GraphQL API client via pycarlo.
