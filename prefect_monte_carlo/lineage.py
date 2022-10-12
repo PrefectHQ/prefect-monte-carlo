@@ -17,6 +17,7 @@ def create_or_update_lineage(
     source: Dict[str, Any],
     destination: Dict[str, Any],
     expire_at: Optional[str] = None,
+    include_prefect_context_tags: Optional[bool] = False,
 ) -> box.BoxList:
     """Task for creating or updating a lineage node for the given source
     and destination nodes, as well as for creating a lineage edge between those nodes.
@@ -31,13 +32,14 @@ def create_or_update_lineage(
             and optionally also a list of `tags`.
         expire_at: Date and time indicating when to expire
             a source-destination edge.
+        include_prefect_context_tags: Whether to include the Prefect context tags.
 
     Raises:
         ValueError: If the source or destination node configuration
             is missing `object_id` or `resource_name`.
 
     Returns:
-        box.BoxList: _description_
+        box.BoxList: Metadata for edge created between `source` and `destination` nodes.
     """
     logger = get_run_logger()
 
@@ -58,13 +60,24 @@ def create_or_update_lineage(
     if "object_type" not in destination:
         destination["object_type"] = "table"
 
+    if include_prefect_context_tags:
+        if "tags" in source:
+            source["tags"].extend(get_prefect_context_tags())
+        else:
+            source["tags"] = get_prefect_context_tags()
+
+        if "tags" in destination:
+            destination["tags"].extend(get_prefect_context_tags())
+        else:
+            destination["tags"] = get_prefect_context_tags()
+
     source_node_mcon = create_or_update_lineage_node.fn(
         monte_carlo_credentials=monte_carlo_credentials,
         node_name=source["node_name"],
         object_id=source["object_id"],
         object_type=source["object_type"],
         resource_name=source["resource_name"],
-        tags=source["tags"] if "tags" in source else [],
+        tags=source["tags"],
     )
 
     source_node_url = f"{monte_carlo_credentials.catalog_url}/{source_node_mcon}/table"
@@ -76,7 +89,7 @@ def create_or_update_lineage(
         object_id=destination["object_id"],
         object_type=destination["object_type"],
         resource_name=destination["resource_name"],
-        tags=destination["tags"] if "tags" in destination else [],
+        tags=destination["tags"],
     )
 
     destination_node_url = (
@@ -263,39 +276,9 @@ def get_prefect_context_tags() -> List[Dict[str, str]]:
     """
     try:
         return [  # rudimentary set of tags
-            dict(propertyName=key, propertyValue=value)
-            for key, value in get_run_context().flow_run.dict().items()
-            if isinstance(value, str)
+            dict(propertyName=key, propertyValue=str(value))
+            for key, value in get_run_context().task_run.dict().items()
         ]
     except MissingContextError:
         # TODO: Log a warning here?
         raise
-
-
-if __name__ == "__main__":
-    from prefect import flow
-
-    @flow
-    def testing(dataset: str = "raw_customers"):
-        create_or_update_lineage(
-            monte_carlo_credentials=MonteCarloCredentials.load(
-                "monte-carlo-credentials"
-            ),
-            source=dict(
-                node_name=f"source_{dataset}",
-                object_id=f"source_{dataset}",
-                object_type="table",
-                resource_name="ecommerce_system",
-                tags=[{"propertyName": "testing", "propertyValue": "testingvalue"}],
-            ),
-            destination=dict(
-                node_name=f"prefect-community:jaffle_shop.{dataset}",
-                object_id=f"prefect-community:jaffle_shop.{dataset}",
-                object_type="table",
-                resource_name="bigquery-2021-12-09T11:47:30.306Z",
-                tags=[{"propertyName": "testing", "propertyValue": "testingvalue"}],
-            ),
-            expire_at=datetime.now() + timedelta(days=10),
-        )
-
-    testing()
