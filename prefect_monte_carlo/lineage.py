@@ -1,7 +1,7 @@
 """ Module to defines tasks interacting with Monte Carlo lineage resources. """
 
-from datetime import datetime, timedelta
-from typing import Any, Dict, List, Optional, Union
+from datetime import datetime
+from typing import Any, Dict, List, Optional
 
 import box
 from prefect import get_run_logger, task
@@ -11,12 +11,29 @@ from prefect.exceptions import MissingContextError
 from prefect_monte_carlo.credentials import MonteCarloCredentials
 
 
+class MonteCarloIncorrectTagsFormat(Exception):
+    """Exception for incorrect tags format"""
+
+    pass
+
+
+def validate_tags(tags: List[Dict[str, str]]):
+    for tag in tags:
+        if sorted(tag.keys()) != ["propertyName", "propertyValue"]:
+            raise MonteCarloIncorrectTagsFormat(
+                "Must provide tags in the format "
+                '[{"propertyName": "tag_name", "propertyValue": "tag_value"}].',
+                "You provided: ",
+                tag,
+            )
+
+
 @task
 def create_or_update_lineage(
     monte_carlo_credentials: MonteCarloCredentials,
     source: Dict[str, Any],
     destination: Dict[str, Any],
-    expire_at: Optional[str] = None,
+    expire_at: Optional[datetime] = None,
     include_prefect_context_tags: Optional[bool] = False,
 ) -> box.BoxList:
     """Task for creating or updating a lineage node for the given source
@@ -26,10 +43,10 @@ def create_or_update_lineage(
         monte_carlo_credentials: The Monte Carlo credentials block used to generate
             an authenticated GraphQL API client via pycarlo.
         source: A source node configuration - expected to include the following
-            keys: `node_name`, `object_id`, `object_type`, `resource_name`.
+            keys: `node_name`, `object_id`, `object_type`, `resource_name`, `tags`.
         destination: A destination node configuration - expected to include the
             following keys: `node_name`, `object_id`, `object_type`, `resource_name`,
-            and optionally also a list of `tags`.
+            `tags`.
         expire_at: Date and time indicating when to expire
             a source-destination edge.
         include_prefect_context_tags: Whether to include the Prefect context tags.
@@ -60,16 +77,14 @@ def create_or_update_lineage(
     if "object_type" not in destination:
         destination["object_type"] = "table"
 
-    if include_prefect_context_tags:
-        if "tags" in source:
-            source["tags"].extend(get_prefect_context_tags())
-        else:
-            source["tags"] = get_prefect_context_tags()
-
-        if "tags" in destination:
-            destination["tags"].extend(get_prefect_context_tags())
-        else:
-            destination["tags"] = get_prefect_context_tags()
+    if "tags" in source:
+        validate_tags(source["tags"])
+        if include_prefect_context_tags:
+            source["tags"] += get_prefect_context_tags()
+    if "tags" in destination:
+        validate_tags(destination["tags"])
+        if include_prefect_context_tags:
+            destination["tags"] += get_prefect_context_tags()
 
     source_node_mcon = create_or_update_lineage_node.fn(
         monte_carlo_credentials=monte_carlo_credentials,
@@ -104,7 +119,7 @@ def create_or_update_lineage(
         monte_carlo_credentials=monte_carlo_credentials,
         source=source,
         destination=destination,
-        expire_at=expire_at,
+        expire_at=expire_at.isoformat(),
     )
 
     logger.info("Created or updated a destination lineage edge %s", edge_id)
@@ -170,7 +185,7 @@ def create_or_update_lineage_edge(
     source: Dict[str, Any],
     destination: Dict[str, Any],
     monte_carlo_credentials: MonteCarloCredentials,
-    expire_at: Optional[Union[datetime, str]] = None,
+    expire_at: Optional[datetime] = None,
 ) -> box.Box:
     """Create or update a Monte Carlo lineage edge via the GraphQL API.
 
@@ -220,13 +235,6 @@ def create_or_update_lineage_edge(
         ```
 
     """
-    if expire_at:
-        expire_at = (
-            expire_at.isoformat() if isinstance(expire_at, datetime) else expire_at
-        )
-    else:
-        expire_at = (datetime.now() + timedelta(days=1)).isoformat()
-
     client = monte_carlo_credentials.get_client()
 
     query = """
