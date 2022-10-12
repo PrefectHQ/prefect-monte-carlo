@@ -4,6 +4,7 @@ from uuid import uuid4
 import pytest
 from box import BoxList
 from pycarlo.common.errors import GqlError
+from pycarlo.features.circuit_breakers.exceptions import CircuitBreakerPollException
 
 from prefect_monte_carlo.credentials import MonteCarloCredentials
 
@@ -98,8 +99,42 @@ def mock_monte_carlo_resources():
 
 
 @pytest.fixture
+def mock_circuit_breaker_is_not_flipped(monkeypatch):
+    circuit_breaker_service = MagicMock()
+
+    circuit_breaker_service.trigger.return_value = random_uuid
+    circuit_breaker_service.poll.return_value = 0
+
+    monkeypatch.setattr(
+        "prefect_monte_carlo.circuit_breakers.CircuitBreakerService",
+        MagicMock(return_value=circuit_breaker_service),
+    )
+
+
+@pytest.fixture
+def mock_circuit_breaker_is_flipped(monkeypatch):
+    circuit_breaker_service = MagicMock()
+
+    circuit_breaker_service.trigger.return_value = random_uuid
+    circuit_breaker_service.poll.return_value = 100
+
+    monkeypatch.setattr(
+        "prefect_monte_carlo.circuit_breakers.CircuitBreakerService",
+        MagicMock(return_value=circuit_breaker_service),
+    )
+
+
+@pytest.fixture
 def mock_monte_carlo_resources_response(monkeypatch, mock_monte_carlo_resources):
     monkeypatch.setattr(
         "pycarlo.core.Client.__call__",
         MagicMock(return_value=mock_monte_carlo_resources),
+    )
+
+
+@pytest.fixture
+def mock_failed_polling(monkeypatch):
+    monkeypatch.setattr(
+        "prefect_monte_carlo.circuit_breakers.CircuitBreakerService.poll",
+        MagicMock(side_effect=CircuitBreakerPollException),
     )
