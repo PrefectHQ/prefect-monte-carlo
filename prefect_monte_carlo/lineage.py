@@ -4,7 +4,7 @@ from datetime import datetime, timedelta
 from typing import Any, Dict, List, Optional, Union
 
 import box
-from prefect import task
+from prefect import get_run_logger, task
 from prefect.context import get_run_context
 from prefect.exceptions import MissingContextError
 
@@ -39,8 +39,13 @@ def create_or_update_lineage(
     Returns:
         box.BoxList: _description_
     """
+    logger = get_run_logger()
+
+    if not ("node_name" in source and "node_name" in destination):
+        raise ValueError("Must provide a `node_name` in both source and destination.")
+
     if not ("object_id" in source and "object_id" in destination):
-        raise ValueError("Source and destination objects must have an `object_id`.")
+        raise ValueError("Must provide an `object_id` in both source and destination.")
 
     if not ("resource_name" in source and "resource_name" in destination):
         raise ValueError(
@@ -53,7 +58,45 @@ def create_or_update_lineage(
     if "object_type" not in destination:
         destination["object_type"] = "table"
 
-    mc_client = monte_carlo_credentials.get_client()
+    source_node_mcon = create_or_update_lineage_node.fn(
+        monte_carlo_credentials=monte_carlo_credentials,
+        node_name=source["node_name"],
+        object_id=source["object_id"],
+        object_type=source["object_type"],
+        resource_name=source["resource_name"],
+        tags=source["tags"] if "tags" in source else [],
+    )
+
+    source_node_url = f"{monte_carlo_credentials.catalog_url}/{source_node_mcon}/table"
+    logger.info("Created or updated a source lineage node %s", source_node_url)
+
+    destination_node_mcon = create_or_update_lineage_node.fn(
+        monte_carlo_credentials=monte_carlo_credentials,
+        node_name=destination["node_name"],
+        object_id=destination["object_id"],
+        object_type=destination["object_type"],
+        resource_name=destination["resource_name"],
+        tags=destination["tags"] if "tags" in destination else [],
+    )
+
+    destination_node_url = (
+        f"{monte_carlo_credentials.catalog_url}/{destination_node_mcon}/table"
+    )
+    logger.info(
+        "Created or updated a destination lineage node %s", destination_node_url
+    )
+
+    # edge between source and destination nodes
+    edge_id = create_or_update_lineage_edge.fn(
+        monte_carlo_credentials=monte_carlo_credentials,
+        source=source,
+        destination=destination,
+        expire_at=expire_at,
+    )
+
+    logger.info("Created or updated a destination lineage edge %s", edge_id)
+
+    return edge_id
 
 
 @task
@@ -63,6 +106,7 @@ def create_or_update_lineage_node(
     object_id: str,
     object_type: str,
     resource_name: str,
+    tags: Optional[List[Dict[str, str]]] = None,
 ) -> box.Box:
     """Task for creating or updating a lineage node via the Monte Carlo GraphQL API.
 
@@ -72,6 +116,7 @@ def create_or_update_lineage_node(
         object_id: The object ID of the lineage node.
         object_type: The object type of the lineage node.
         resource_name: The resource name of the lineage node.
+        tags: A list of tags to apply to the lineage node.
 
     Returns:
         box.Box: The response from the GraphQL API.
@@ -81,17 +126,18 @@ def create_or_update_lineage_node(
     response = mc_client(
         query="""
         mutation($node_name: String!, $object_id: String!, $object_type: String!,
-        $resource_name: String! ) {
+        $resource_name: String!, $tags: [ObjectPropertyInput]
+        ) {
             createOrUpdateLineageNode(
             name: $node_name,
             objectId: $object_id,
             objectType: $object_type,
             resourceName: $resource_name,
+            properties: $tags
             ){
-            node{
-                nodeId
-                mcon
-            }
+                node{
+                    mcon
+                }
             }
         }
         """,
@@ -100,6 +146,7 @@ def create_or_update_lineage_node(
             object_id=object_id,
             object_type=object_type,
             resource_name=resource_name,
+            tags=tags,
         ),
     )
     return response
@@ -223,3 +270,32 @@ def get_prefect_context_tags() -> List[Dict[str, str]]:
     except MissingContextError:
         # TODO: Log a warning here?
         raise
+
+
+if __name__ == "__main__":
+    from prefect import flow
+
+    @flow
+    def testing(dataset: str = "raw_customers"):
+        create_or_update_lineage(
+            monte_carlo_credentials=MonteCarloCredentials.load(
+                "monte-carlo-credentials"
+            ),
+            source=dict(
+                node_name=f"source_{dataset}",
+                object_id=f"source_{dataset}",
+                object_type="table",
+                resource_name="ecommerce_system",
+                tags=[{"propertyName": "testing", "propertyValue": "testingvalue"}],
+            ),
+            destination=dict(
+                node_name=f"prefect-community:jaffle_shop.{dataset}",
+                object_id=f"prefect-community:jaffle_shop.{dataset}",
+                object_type="table",
+                resource_name="bigquery-2021-12-09T11:47:30.306Z",
+                tags=[{"propertyName": "testing", "propertyValue": "testingvalue"}],
+            ),
+            expire_at=datetime.now() + timedelta(days=10),
+        )
+
+    testing()
