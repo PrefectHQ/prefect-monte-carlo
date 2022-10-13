@@ -10,7 +10,7 @@ from pycarlo.features.circuit_breakers import CircuitBreakerService
 from pycarlo.features.circuit_breakers.exceptions import CircuitBreakerPollException
 
 from prefect_monte_carlo.credentials import MonteCarloCredentials
-from prefect_monte_carlo.utililties import rule_uuid_from_name
+from prefect_monte_carlo.graphql import rule_uuid_from_name
 
 
 def skip_if_circuit_breaker_flipped(
