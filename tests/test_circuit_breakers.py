@@ -1,8 +1,12 @@
 import pytest
 from prefect import flow
 from pycarlo.common.errors import GqlError
+from pycarlo.features.circuit_breakers.exceptions import CircuitBreakerPollException
 
-from prefect_monte_carlo.circuit_breakers import skip_if_circuit_breaker_flipped
+from prefect_monte_carlo.circuit_breakers import (
+    circuit_breaker_is_flipped,
+    skip_if_circuit_breaker_flipped,
+)
 
 
 async def test_circuit_breaker_by_uuid_no_rule_breach(
@@ -201,4 +205,45 @@ async def test_ambiguous_rule_name_passed(
         pass
 
     with pytest.raises(GqlError):
+        test_flow()
+
+
+async def test_circuit_breaker_is_not_flipped(
+    mock_monte_carlo_creds, random_uuid, mock_circuit_breaker_is_not_flipped
+):
+    @flow
+    def test_flow():
+        return circuit_breaker_is_flipped(
+            monte_carlo_credentials=mock_monte_carlo_creds, rule_uuid=random_uuid
+        )
+
+    breaker_is_flipped = test_flow()
+
+    assert not breaker_is_flipped
+
+
+async def test_circuit_breaker_is_flipped(
+    mock_monte_carlo_creds, random_uuid, mock_circuit_breaker_is_flipped
+):
+    @flow
+    def test_flow():
+        return circuit_breaker_is_flipped(
+            monte_carlo_credentials=mock_monte_carlo_creds, rule_uuid=random_uuid
+        )
+
+    breaker_is_flipped = test_flow()
+
+    assert breaker_is_flipped
+
+
+async def test_circuit_breaker_poll_error_raised(
+    mock_monte_carlo_creds, random_uuid, mock_failed_polling
+):
+    @flow
+    def test_flow():
+        circuit_breaker_is_flipped(
+            monte_carlo_credentials=mock_monte_carlo_creds, rule_uuid=random_uuid
+        )
+
+    with pytest.raises(CircuitBreakerPollException):
         test_flow()
