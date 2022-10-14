@@ -92,8 +92,9 @@ async def create_or_update_lineage(
             # `create_or_update_lineage` is a flow, so this will be a subflow run
             # `extra_tags` are added to both the `source` and `destination` nodes
             create_or_update_lineage(
-                source,
-                destination,
+                monte_carlo_credentials=MonteCarloCredentials.load("my-mc-creds)
+                source=source,
+                destination=destination,
                 expire_at=datetime.now() + timedelta(days=10),
                 extra_tags=[
                     {"propertyName": "flow_run_name", "propertyValue": flow_run_name}

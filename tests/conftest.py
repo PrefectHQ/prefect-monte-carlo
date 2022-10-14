@@ -8,6 +8,7 @@ from pycarlo.common.errors import GqlError
 from pycarlo.features.circuit_breakers.exceptions import CircuitBreakerPollException
 
 from prefect_monte_carlo.credentials import MonteCarloCredentials
+from prefect_monte_carlo.lineage import MonteCarloLineageNode
 
 
 @pytest.fixture
@@ -142,8 +143,8 @@ def mock_failed_polling(monkeypatch):
 
 
 @pytest.fixture
-def mock_source_dict():
-    return dict(
+def mock_source_model():
+    return MonteCarloLineageNode(
         node_name="source_dataset",
         object_id="source_dataset",
         object_type="table",
@@ -153,8 +154,8 @@ def mock_source_dict():
 
 
 @pytest.fixture
-def mock_destination_dict():
-    return dict(
+def mock_destination_model():
+    return MonteCarloLineageNode(
         node_name="destination_dataset",
         object_id="destination_dataset",
         object_type="table",
