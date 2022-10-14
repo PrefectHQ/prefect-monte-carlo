@@ -1,4 +1,4 @@
-""" Module to defines tasks interacting with Monte Carlo lineage resources. """
+""" Module to define tasks and flows for interacting with lineage resources. """
 
 from datetime import datetime
 from typing import Any, Dict, List, Optional
@@ -58,6 +58,49 @@ async def create_or_update_lineage(
 
     Returns:
         The ID of the lineage edge created or updated.
+
+    Example:
+        Create or update a lineage edge between a source and destination node.
+        ```python
+        from prefect import flow
+        from prefect.context import get_run_context
+        from prefect_monte_carlo.credentials import MonteCarloCredentials
+        from prefect_monte_carlo.lineage import (
+            create_or_update_lineage, MonteCarloLineageNode
+        )
+
+        @flow
+        def monte_carlo_orchestrator():
+            flow_run_name = get_run_context().flow_run.name
+
+            source = MonteCarloLineageNode(
+                node_name="source_dataset",
+                object_id="source_dataset",
+                object_type="table",
+                resource_name="some_resource_name",
+                tags=[{"propertyName": "dataset_owner", "propertyValue": "owner_name"}],
+            )
+
+            destination = MonteCarloLineageNode(
+                node_name="destination_dataset",
+                object_id="destination_dataset",
+                object_type="table",
+                resource_name="some_resource_name",
+                tags=[{"propertyName": "dataset_owner", "propertyValue": "owner_name"}],
+            )
+
+            # `create_or_update_lineage` is a flow, so this will be a subflow run
+            # `extra_tags` are added to both the `source` and `destination` nodes
+            create_or_update_lineage(
+                source,
+                destination,
+                expire_at=datetime.now() + timedelta(days=10),
+                extra_tags=[
+                    {"propertyName": "flow_run_name", "propertyValue": flow_run_name}
+                ]
+            )
+
+        ```
     """
     logger = get_run_logger()
 
@@ -124,6 +167,7 @@ async def create_or_update_lineage_node(
 ) -> str:
     """Task for creating or updating a lineage node via the Monte Carlo GraphQL API.
 
+
     Args:
         monte_carlo_credentials: The Monte Carlo credentials block used to generate.
         node_name: The name of the lineage node.
@@ -134,6 +178,31 @@ async def create_or_update_lineage_node(
 
     Returns:
         The MCON identifying the lineage node.
+
+    Example:
+        Create or update a lineage node from a `MonteCarloLineageNode` object:
+        ```python
+        from prefect import flow
+        from prefect_monte_carlo.credentials import MonteCarloCredentials
+        from prefect_monte_carlo.lineage import (
+            create_or_update_lineage_node, MonteCarloLineageNode
+        )
+
+        mc_node = MonteCarloLineageNode(
+            node_name="source_node",
+            object_id="my_source_object_id",
+            object_type="table",
+            resource_name="my_source_resource_name",
+            tags=[{"propertyName": "tag_key", "propertyValue": "tag_value"}],
+        )
+
+        @flow
+        def monte_carlo_lineage_flow():
+            node_mcon = create_or_update_lineage_node(
+                monte_carlo_credentials=MonteCarloCredentials.load("my-mc-creds"),
+                **mc_node.dict(),
+
+        ```
     """
     mc_client = monte_carlo_credentials.get_client()
 
@@ -196,9 +265,11 @@ async def create_or_update_lineage_edge(
         ```python
         from prefect import flow
         from prefect_monte_carlo.credentials import MonteCarloCredentials
-        from prefect_monte_carlo.lineage import create_or_update_lineage_edge
+        from prefect_monte_carlo.lineage import (
+            create_or_update_lineage_edge, MonteCarloLineageNode
+        )
 
-        source = dict(
+        source = MonteCarloLineageNode(
             node_name="example_table_name",
             object_id="example_table_name",
             # "table" is recommended, but you can use any string, e.g. "csv_file"
@@ -207,7 +278,7 @@ async def create_or_update_lineage_edge(
             tags=[{"propertyName": "key", "propertyValue": "value"}]
         )
 
-        destination = dict(
+        destination = MonteCarloLineageNode(
             node_name="db_name:schema_name.table_name",
             object_id="db_name:schema_name.table_name",
             object_type="table",
@@ -218,8 +289,8 @@ async def create_or_update_lineage_edge(
         @flow
         def my_monte_carlo_flow():
             create_or_update_lineage_edge(
-                source={},
-                destination={},
+                source=source,
+                destination=destination,
                 monte_carlo_credentials=MonteCarloCredentials.load("my-mc-creds"),
                 expire_at=datetime.now() + timedelta(days=10),
             )

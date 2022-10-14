@@ -105,6 +105,9 @@ async def circuit_breaker_is_flipped(
     `rule_uuid` from the Monte Carlo GraphQL API and use it to trigger the custom
     rule.
 
+    To surface pycarlo `CircuitBreakerService` polling logs as Prefect logs, use the
+    `DEBUG` log level when running your flow.
+
     Args:
         monte_carlo_credentials: The Monte Carlo credentials block used to
             generate an authenticated GraphQL API client.

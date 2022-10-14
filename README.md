@@ -70,13 +70,13 @@ example_execute_query()
 from prefect import flow
 from prefect.context import get_run_context
 from prefect_monte_carlo.credentials import MonteCarloCredentials
-from prefect_monte_carlo.lineage import create_or_update_lineage
+from prefect_monte_carlo.lineage import create_or_update_lineage, MonteCarloLineageNode
 
 @flow
 def monte_carlo_orchestrator():
     current_flow_run_name = get_run_context().flow_run.name
 
-    source = dict(
+    source = MonteCarloLineageNode(
         node_name="source_dataset",
         object_id="source_dataset",
         object_type="table",
@@ -84,7 +84,7 @@ def monte_carlo_orchestrator():
         tags=[{"propertyName": "dataset_owner", "propertyValue": "owner_name"}],
     )
 
-    destination = dict(
+    destination = MonteCarloLineageNode(
         node_name="destination_dataset",
         object_id="destination_dataset",
         object_type="table",
