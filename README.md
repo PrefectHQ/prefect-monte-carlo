@@ -50,7 +50,7 @@ Note, to use the `load` method on Blocks, you must already have a block document
 #### Execute a query against the Monte Carlo GraphQL API
 ```python
 from prefect import flow
-from prefect_monte_carlo import execute_graphql_operation
+from prefect_monte_carlo.graphql import execute_graphql_operation
 from prefect_monte_carlo.credentials import MonteCarloCredentials
 
 @flow
