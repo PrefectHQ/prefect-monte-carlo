@@ -55,9 +55,7 @@ from prefect_monte_carlo.credentials import MonteCarloCredentials
 
 @flow
 def example_execute_query():
-    monte_carlo_credentials = MonteCarloCredentials.load(
-        "my-montecarlo-credentials"
-    )
+    monte_carlo_credentials = MonteCarloCredentials.load("my-mc-creds")
     result = execute_graphql_operation(
         monte_carlo_credentials=monte_carlo_credentials,
         operation="query getUser { getUser { email firstName lastName }}",
@@ -95,8 +93,9 @@ def monte_carlo_orchestrator():
     # `create_or_update_lineage` is a flow, so this will be a subflow run
     # `extra_tags` are added to both the `source` and `destination` nodes
     create_or_update_lineage(
-        source,
-        destination,
+        monte_carlo_credentials=MonteCarloCredentials.load("my-mc-creds)
+        source=source,
+        destination=destination,
         expire_at=datetime.now() + timedelta(days=10),
         extra_tags=[{"propertyName": "flow_run_name", "propertyValue": current_flow_run_name}]
     )
