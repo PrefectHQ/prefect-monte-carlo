@@ -18,7 +18,7 @@
 
 ## Welcome!
 
-A collection of Prefect tasks and flows to orchestrate Monte Carlo
+A collection of Prefect tasks and flows to interact with Monte Carlo from workflows.
 
 ## Getting Started
 
@@ -47,7 +47,7 @@ prefect block register -m prefect_monte_carlo.credentials
 Note, to use the `load` method on Blocks, you must already have a block document [saved through code](https://orion-docs.prefect.io/concepts/blocks/#saving-blocks) or [saved through the UI](https://orion-docs.prefect.io/ui/blocks/).
 
 ### Write and run a flow
-
+#### Execute a query against the Monte Carlo GraphQL API
 ```python
 from prefect import flow
 from prefect_monte_carlo import execute_graphql_operation
@@ -64,6 +64,62 @@ def example_execute_query():
     )
 
 example_execute_query()
+```
+#### Create or update Monte Carlo lineage
+```python
+from prefect import flow
+from prefect.context import get_run_context
+from prefect_monte_carlo.credentials import MonteCarloCredentials
+from prefect_monte_carlo.lineage import create_or_update_lineage
+
+@flow
+def monte_carlo_orchestrator():
+    current_flow_run_name = get_run_context().flow_run.name
+
+    source = dict(
+        node_name="source_dataset",
+        object_id="source_dataset",
+        object_type="table",
+        resource_name="some_resource_name",
+        tags=[{"propertyName": "dataset_owner", "propertyValue": "owner_name"}],
+    )
+
+    destination = dict(
+        node_name="destination_dataset",
+        object_id="destination_dataset",
+        object_type="table",
+        resource_name="some_resource_name",
+        tags=[{"propertyName": "dataset_owner", "propertyValue": "owner_name"}],
+    )
+
+    # `create_or_update_lineage` is a flow, so this will be a subflow run
+    # `extra_tags` are added to both the `source` and `destination` nodes
+    create_or_update_lineage(
+        source,
+        destination,
+        expire_at=datetime.now() + timedelta(days=10),
+        extra_tags=[{"propertyName": "flow_run_name", "propertyValue": current_flow_run_name}]
+    )
+
+```
+
+
+#### Conditionally execute a flow based on a Monte Carlo circuit breaker rule
+```python
+from prefect import flow
+from prefect_monte_carlo.circuit_breakers import skip_if_circuit_breaker_flipped
+from prefect_monte_carlo.credentials import MonteCarloCredentials
+
+@flow
+@skip_if_circuit_breaker_flipped(
+    monte_carlo_credentials=MonteCarloCredentials.load("my-mc-creds")
+    rule_uuid="7810b1ce-4dee-4f40-b14f-ced65c80aea9",
+)
+def conditional_flow():
+    logger = get_run_logger()
+    logger.info("If you see this, your circuit breaker rule was not breached!")
+
+conditional_flow()
 ```
 
 ## Resources

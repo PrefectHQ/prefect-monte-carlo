@@ -50,5 +50,8 @@ nav:
     - Home: index.md
     - Circuit Breakers: circuit_breakers.md
     - Credentials: credentials.md
+    - Exceptions: exceptions.md
     - GraphQL: graphql.md
+    - Lineage: lineage.md
     - Resources: resources.md
+    - Utilities: utilities.md

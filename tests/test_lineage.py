@@ -27,6 +27,40 @@ async def test_create_or_update_lineage(
     assert isinstance(edge_id, str)
 
 
+async def test_create_or_update_lineage_with_extra_tags(
+    mock_source_dict,
+    mock_destination_dict,
+    monte_carlo_creds,
+    mock_create_or_update_lineage_node,
+    mock_create_or_update_lineage_edge,
+):
+
+    edge_id = await create_or_update_lineage(
+        monte_carlo_credentials=monte_carlo_creds,
+        source=mock_source_dict,
+        destination=mock_destination_dict,
+        extra_tags=[{"propertyName": "extra_tag", "propertyValue": "extra_value"}],
+    )
+
+    assert isinstance(edge_id, str)
+
+
+async def test_create_or_update_lineage_with_bad_extra_tags(
+    mock_source_dict,
+    mock_destination_dict,
+    monte_carlo_creds,
+    mock_create_or_update_lineage_node,
+    mock_create_or_update_lineage_edge,
+):
+    with pytest.raises(MonteCarloIncorrectTagsFormatException):
+        await create_or_update_lineage(
+            monte_carlo_credentials=monte_carlo_creds,
+            source=mock_source_dict,
+            destination=mock_destination_dict,
+            extra_tags=[{"non": "conforming", "tag": "structure"}],
+        )
+
+
 async def test_create_or_update_lineage_source_with_bad_tags(
     mock_destination_dict, monte_carlo_creds
 ):
