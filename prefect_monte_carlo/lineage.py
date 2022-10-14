@@ -1,7 +1,7 @@
 """ Module to define tasks and flows for interacting with lineage resources. """
 
 from datetime import datetime
-from typing import Any, Dict, List, Optional
+from typing import Dict, List, Optional
 
 from prefect import flow, get_run_logger, task
 from pydantic import BaseModel, validator
@@ -242,9 +242,9 @@ async def create_or_update_lineage_node(
     description="Create or update a Monte Carlo lineage edge via the GraphQL API.",
 )
 async def create_or_update_lineage_edge(
-    source: Dict[str, Any],
-    destination: Dict[str, Any],
     monte_carlo_credentials: MonteCarloCredentials,
+    source: MonteCarloLineageNode,
+    destination: MonteCarloLineageNode,
     expire_at: Optional[datetime] = None,
 ) -> str:
     """Create or update a Monte Carlo lineage edge via the GraphQL API.
@@ -326,12 +326,12 @@ async def create_or_update_lineage_edge(
         """
 
     variables = dict(
-        destination_object_id=destination["object_id"],
-        destination_object_type=destination["object_type"],
-        destination_resource_name=destination["resource_name"],
-        source_object_id=source["object_id"],
-        source_object_type=source["object_type"],
-        source_resource_name=source["resource_name"],
+        destination_object_id=destination.object_id,
+        destination_object_type=destination.object_type,
+        destination_resource_name=destination.resource_name,
+        source_object_id=source.object_id,
+        source_object_type=source.object_type,
+        source_resource_name=source.resource_name,
         expire_at=expire_at.isoformat() if expire_at else None,
     )
 
