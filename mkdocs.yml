@@ -48,6 +48,7 @@ plugins:
 
 nav:
     - Home: index.md
+    - Circuit Breakers: circuit_breakers.md
     - Credentials: credentials.md
     - GraphQL: graphql.md
-    - Circuit Breakers: circuit_breakers.md
+    - Resources: resources.md
