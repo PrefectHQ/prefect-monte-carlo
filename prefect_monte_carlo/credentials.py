@@ -14,7 +14,7 @@ class MonteCarloCredentials(Block):
     Attributes:
         api_key: The Monte Carlo API key to authenticate with.
         api_key_id: The Monte Carlo API key ID to authenticate with.
-        catalog_url: The url of the Monte Carlo catalog to use.
+        catalog_url: The URL of the Monte Carlo catalog to use.
 
     Example:
         Load stored Monte Carlo credentials:

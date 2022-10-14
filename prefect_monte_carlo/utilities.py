@@ -31,8 +31,7 @@ async def rule_uuid_from_name(
 
 
 def validate_tags(tags: List[Dict[str, str]]):
-    """Validate that the Monte Carlo lineage
-    node tags are in the correct format.
+    """Validate that Monte Carlo lineage node tags are in the correct format.
 
     Args:
         tags: List of user-defined tags to validate.
@@ -42,9 +41,9 @@ def validate_tags(tags: List[Dict[str, str]]):
 
     """
     for tag in tags:
-        if sorted(tag.keys()) != ["propertyName", "propertyValue"]:
+        if tag.keys() != {"propertyName", "propertyValue"}:
             raise MonteCarloIncorrectTagsFormatException(
-                "Must provide tags in the format "
+                "Must provide tags as a list of dicts like "
                 '[{"propertyName": "tag_name", "propertyValue": "tag_value"}].',
                 "You provided: ",
                 tag,
