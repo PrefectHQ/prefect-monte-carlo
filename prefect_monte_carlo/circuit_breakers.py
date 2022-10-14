@@ -4,13 +4,13 @@ from typing import Optional
 from uuid import UUID
 
 from prefect import get_run_logger, task
-from prefect.orion.schemas.states import Cancelled
+from prefect.states import Cancelled
 from prefect.utilities.asyncutils import is_async_fn
 from pycarlo.features.circuit_breakers import CircuitBreakerService
 from pycarlo.features.circuit_breakers.exceptions import CircuitBreakerPollException
 
 from prefect_monte_carlo.credentials import MonteCarloCredentials
-from prefect_monte_carlo.graphql import rule_uuid_from_name
+from prefect_monte_carlo.utilities import rule_uuid_from_name
 
 
 def skip_if_circuit_breaker_flipped(
@@ -104,6 +104,9 @@ async def circuit_breaker_is_flipped(
     If `rule_name` is provided, the task will attempt to fetch the associated
     `rule_uuid` from the Monte Carlo GraphQL API and use it to trigger the custom
     rule.
+
+    To surface pycarlo `CircuitBreakerService` polling logs as Prefect logs, use the
+    `DEBUG` log level when running your flow.
 
     Args:
         monte_carlo_credentials: The Monte Carlo credentials block used to

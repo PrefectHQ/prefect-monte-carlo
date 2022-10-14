@@ -1,34 +1,11 @@
 """Module for GraphQL queries and mutations."""
+
 from typing import Dict, Optional
-from uuid import UUID
 
 import box
 from prefect import task
 
 from prefect_monte_carlo.credentials import MonteCarloCredentials
-
-
-async def rule_uuid_from_name(
-    rule_name: str,
-    monte_carlo_credentials: MonteCarloCredentials,
-) -> UUID:
-    """Get the UUID of a Monte Carlo monitor rule from its name.
-
-
-    Args:
-        rule_name: Name of the Monte Carlo monitor rule.
-        monte_carlo_credentials: Credentials
-            to authenticate with the Monte Carlo GraphQL API.
-    """
-    query = f"""
-        query {{
-            getCustomRule (
-                descriptionContains: "{rule_name}"
-        ) {{ uuid }}
-    }}
-    """
-    client = monte_carlo_credentials.get_client()
-    return client(query).get_custom_rule.uuid
 
 
 @task
