@@ -4,7 +4,7 @@ from typing import Optional
 from uuid import UUID
 
 from prefect import get_run_logger, task
-from prefect.orion.schemas.states import Cancelled
+from prefect.states import Cancelled
 from prefect.utilities.asyncutils import is_async_fn
 from pycarlo.features.circuit_breakers import CircuitBreakerService
 from pycarlo.features.circuit_breakers.exceptions import CircuitBreakerPollException
