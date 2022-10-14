@@ -1,3 +1,4 @@
+from asyncio import Future
 from unittest.mock import MagicMock
 from uuid import uuid4
 
@@ -137,4 +138,60 @@ def mock_failed_polling(monkeypatch):
     monkeypatch.setattr(
         "prefect_monte_carlo.circuit_breakers.CircuitBreakerService.poll",
         MagicMock(side_effect=CircuitBreakerPollException),
+    )
+
+
+@pytest.fixture
+def mock_source_dict():
+    return dict(
+        node_name="source_dataset",
+        object_id="source_dataset",
+        object_type="table",
+        resource_name="ecommerce_system",
+        tags=[{"propertyName": "dataset_owner", "propertyValue": "some_team"}],
+    )
+
+
+@pytest.fixture
+def mock_destination_dict():
+    return dict(
+        node_name="destination_dataset",
+        object_id="destination_dataset",
+        object_type="table",
+        resource_name="bigquery-2021-12-01",
+        tags=[{"propertyName": "dataset_owner", "propertyValue": "some_team"}],
+    )
+
+
+@pytest.fixture
+def mock_mcon():
+    return "MCON++15d3444b-f063-4de1-9b31-104f44223a79++b7e9d69b-09eb-4cfe-8497-7a4e4b592588++table++prefect-community:jaffle_shop.raw_customers"  # noqa
+
+
+@pytest.fixture
+def mock_edge_id():
+    return "e3546a7dc6ee45f0eb63fda79dbc5de4994ffe2471c136aa057b95d3f9e5bd2e"
+
+
+@pytest.fixture
+def mock_create_or_update_lineage_node(monkeypatch, mock_mcon):
+
+    future = Future()
+    future.set_result(mock_mcon)
+
+    monkeypatch.setattr(
+        "prefect_monte_carlo.lineage.create_or_update_lineage_node",
+        MagicMock(return_value=future),
+    )
+
+
+@pytest.fixture
+def mock_create_or_update_lineage_edge(monkeypatch, mock_edge_id):
+
+    future = Future()
+    future.set_result(mock_edge_id)
+
+    monkeypatch.setattr(
+        "prefect_monte_carlo.lineage.create_or_update_lineage_edge",
+        MagicMock(return_value=future),
     )
