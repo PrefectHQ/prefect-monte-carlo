@@ -165,12 +165,22 @@ def mock_destination_dict():
 
 @pytest.fixture
 def mock_mcon():
-    return "MCON++15d3444b-f063-4de1-9b31-104f44223a79++b7e9d69b-09eb-4cfe-8497-7a4e4b592588++table++prefect-community:jaffle_shop.raw_customers"  # noqa
+    return "MCON++someid++table++source_raw_customer"
 
 
 @pytest.fixture
 def mock_edge_id():
     return "e3546a7dc6ee45f0eb63fda79dbc5de4994ffe2471c136aa057b95d3f9e5bd2e"
+
+
+@pytest.fixture
+def mock_create_or_update_node_response(mock_mcon):
+    return {"create_or_update_lineage_node": {"node": {"mcon": mock_mcon}}}
+
+
+@pytest.fixture
+def mock_create_or_update_edge_response(mock_edge_id):
+    return {"create_or_update_lineage_edge": {"edge": {"edge_id": mock_edge_id}}}
 
 
 @pytest.fixture
@@ -182,6 +192,28 @@ def mock_create_or_update_lineage_node(monkeypatch, mock_mcon):
     monkeypatch.setattr(
         "prefect_monte_carlo.lineage.create_or_update_lineage_node",
         MagicMock(return_value=future),
+    )
+
+
+@pytest.fixture
+def mock_create_or_update_lineage_node_response(
+    monkeypatch, mock_create_or_update_node_response
+):
+
+    monkeypatch.setattr(
+        "pycarlo.core.Client.__call__",
+        MagicMock(return_value=mock_create_or_update_node_response),
+    )
+
+
+@pytest.fixture
+def mock_create_or_update_lineage_edge_response(
+    monkeypatch, mock_create_or_update_edge_response
+):
+
+    monkeypatch.setattr(
+        "pycarlo.core.Client.__call__",
+        MagicMock(return_value=mock_create_or_update_edge_response),
     )
 
 

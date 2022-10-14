@@ -104,7 +104,7 @@ async def create_or_update_lineage(
         expire_at=expire_at,
     )
 
-    logger.info(f"Created or updated a destination lineage edge: {edge_id=}")
+    logger.info(f"Created or updated a destination lineage edge: {edge_id}")
 
     return edge_id
 
