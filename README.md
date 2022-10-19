@@ -60,9 +60,8 @@ def example_execute_query():
         monte_carlo_credentials=monte_carlo_credentials,
         operation="query getUser { getUser { email firstName lastName }}",
     )
-
-example_execute_query()
 ```
+
 #### Create or update Monte Carlo lineage
 ```python
 from prefect import flow
@@ -119,8 +118,6 @@ rule_name = "myRule"
 def conditional_flow():
     logger = get_run_logger()
     logger.info("If you see this, your circuit breaker rule was not breached!")
-
-conditional_flow()
 ```
 
 ## Resources
