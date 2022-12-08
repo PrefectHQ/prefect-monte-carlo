@@ -3,5 +3,3 @@
 
 class MonteCarloIncorrectTagsFormatException(Exception):
     """Exception for incorrect tags format"""
-
-    pass
