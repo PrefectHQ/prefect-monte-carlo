@@ -146,6 +146,7 @@ pip install -e ".[dev]"
 5. Add tests
 6. Insert an entry to [CHANGELOG.md](https://github.com/PrefectHQ/prefect-monte-carlo/blob/main/CHANGELOG.md)
 7. Install `pre-commit` to perform quality checks prior to commit:
+
 ```
 pre-commit install
 ```
