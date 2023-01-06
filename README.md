@@ -128,7 +128,7 @@ If you encounter any bugs while using `prefect-monte-carlo`, feel free to open a
 
 If you have any questions or issues while using `prefect-monte-carlo`, you can find help in either the [Prefect Discourse forum](https://discourse.prefect.io/) or the [Prefect Slack community](https://prefect.io/slack).
 
-Feel free to ⭐️ or watch [`prefect-monte-carlo`](https://github.com/PrefectHQ/prefect-monte-carlo) for updates too!
+Feel free to star or watch [`prefect-monte-carlo`](https://github.com/PrefectHQ/prefect-monte-carlo) for updates too!
 
 ## Contributing
 
