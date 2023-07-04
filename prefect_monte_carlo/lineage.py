@@ -92,7 +92,7 @@ async def create_or_update_lineage(
             # `create_or_update_lineage` is a flow, so this will be a subflow run
             # `extra_tags` are added to both the `source` and `destination` nodes
             create_or_update_lineage(
-                monte_carlo_credentials=MonteCarloCredentials.load("my-mc-creds)
+                monte_carlo_credentials=MonteCarloCredentials.load("my-mc-creds")
                 source=source,
                 destination=destination,
                 expire_at=datetime.now() + timedelta(days=10),
@@ -141,16 +141,19 @@ async def create_or_update_lineage(
     )
 
     # edge between source and destination nodes
-    edge_id = await create_or_update_lineage_edge(
+    job_timestamp = await create_or_update_lineage_edge(
         monte_carlo_credentials=monte_carlo_credentials,
         source=source,
         destination=destination,
         expire_at=expire_at,
     )
 
-    logger.info(f"Created or updated a destination lineage edge: {edge_id}")
+    logger.info(
+        f"Created or updated a destination a lineage edge between "
+        f"{source_node_url} and {destination_node_url}"
+    )
 
-    return edge_id
+    return job_timestamp
 
 
 @task(
@@ -320,7 +323,7 @@ async def create_or_update_lineage_edge(
             expireAt: $expire_at
             ){
             edge{
-                edgeId
+                jobTs
             }
             }
         }
@@ -338,6 +341,6 @@ async def create_or_update_lineage_edge(
 
     response = client(query=query, variables=variables)
 
-    edge_id = response["create_or_update_lineage_edge"]["edge"]["edge_id"]
+    job_timestamp = response["create_or_update_lineage_edge"]["edge"]["jobTs"]
 
-    return edge_id
+    return job_timestamp
