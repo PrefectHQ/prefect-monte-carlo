@@ -16,6 +16,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Removed
 
 ### Fixed
+- `create_or_replace_lineage_edge` now returns the `jobTs` field as `edgeId` is not available.
+
 
 ### Security
 
