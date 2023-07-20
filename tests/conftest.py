@@ -175,18 +175,22 @@ def mock_edge_id():
 
 
 @pytest.fixture
+def mock_job_ts():
+    return 1639478400
+
+
+@pytest.fixture
 def mock_create_or_update_node_response(mock_mcon):
     return {"create_or_update_lineage_node": {"node": {"mcon": mock_mcon}}}
 
 
 @pytest.fixture
-def mock_create_or_update_edge_response(mock_edge_id):
-    return {"create_or_update_lineage_edge": {"edge": {"edge_id": mock_edge_id}}}
+def mock_create_or_update_edge_response(mock_job_ts):
+    return {"create_or_update_lineage_edge": {"edge": {"jobTs": mock_job_ts}}}
 
 
 @pytest.fixture
 def mock_create_or_update_lineage_node(monkeypatch, mock_mcon):
-
     future = Future()
     future.set_result(mock_mcon)
 
@@ -200,7 +204,6 @@ def mock_create_or_update_lineage_node(monkeypatch, mock_mcon):
 def mock_create_or_update_lineage_node_response(
     monkeypatch, mock_create_or_update_node_response
 ):
-
     monkeypatch.setattr(
         "pycarlo.core.Client.__call__",
         MagicMock(return_value=mock_create_or_update_node_response),
@@ -211,7 +214,6 @@ def mock_create_or_update_lineage_node_response(
 def mock_create_or_update_lineage_edge_response(
     monkeypatch, mock_create_or_update_edge_response
 ):
-
     monkeypatch.setattr(
         "pycarlo.core.Client.__call__",
         MagicMock(return_value=mock_create_or_update_edge_response),
@@ -220,7 +222,6 @@ def mock_create_or_update_lineage_edge_response(
 
 @pytest.fixture
 def mock_create_or_update_lineage_edge(monkeypatch, mock_edge_id):
-
     future = Future()
     future.set_result(mock_edge_id)
 
