@@ -19,6 +19,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Security
 
+## v0.1.1
+
+Released July 20th, 2023.
+
+### Fixed
+- `create_or_replace_lineage_edge` now returns the `jobTs` field as `edgeId` is not available. - [#31](https://github.com/PrefectHQ/prefect-monte-carlo/pull/31)
+
 ## v0.1.0
 
 Released October 14th, 2022.
