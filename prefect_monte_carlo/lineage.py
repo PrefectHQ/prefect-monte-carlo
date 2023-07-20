@@ -152,7 +152,7 @@ async def create_or_update_lineage(
         f"Created or updated a destination a lineage edge between "
         f"{source_node_url} and {destination_node_url}"
     )
-    
+
     return job_timestamp
 
 
