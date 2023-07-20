@@ -173,6 +173,10 @@ def mock_mcon():
 def mock_edge_id():
     return "e3546a7dc6ee45f0eb63fda79dbc5de4994ffe2471c136aa057b95d3f9e5bd2e"
 
+@pytest.fixture
+def mock_job_ts():
+    return 1639478400
+
 
 @pytest.fixture
 def mock_create_or_update_node_response(mock_mcon):
@@ -180,8 +184,8 @@ def mock_create_or_update_node_response(mock_mcon):
 
 
 @pytest.fixture
-def mock_create_or_update_edge_response(mock_edge_id):
-    return {"create_or_update_lineage_edge": {"edge": {"edge_id": mock_edge_id}}}
+def mock_create_or_update_edge_response(mock_job_ts):
+    return {"create_or_update_lineage_edge": {"edge": {"jobTs": mock_job_ts}}}
 
 
 @pytest.fixture

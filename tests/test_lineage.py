@@ -155,4 +155,4 @@ async def test_create_or_update_lineage_edge_using_kwargs(
 
     edge_id = await test_flow()
 
-    assert edge_id == "e3546a7dc6ee45f0eb63fda79dbc5de4994ffe2471c136aa057b95d3f9e5bd2e"
+    assert edge_id == 1639478400
