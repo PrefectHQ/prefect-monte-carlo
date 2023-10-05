@@ -4,7 +4,12 @@ from datetime import datetime
 from typing import Dict, List, Optional
 
 from prefect import flow, get_run_logger, task
-from pydantic import BaseModel, validator
+from pydantic import VERSION as PYDANTIC_VERSION
+
+if PYDANTIC_VERSION.startswith("2."):
+    from pydantic.v1 import BaseModel, validator
+else:
+    from pydantic import BaseModel, validator
 
 from prefect_monte_carlo.credentials import MonteCarloCredentials
 from prefect_monte_carlo.utilities import validate_tags
