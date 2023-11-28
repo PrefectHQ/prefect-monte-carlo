@@ -30,7 +30,7 @@ class MonteCarloCredentials(Block):
     """
 
     _block_type_name = "Monte Carlo Credentials"
-    _logo_url = "https://images.ctfassets.net/gm98wzqotmnx/5OqrPNRdLMvqZzxo9f6Z25/f920dff0f1201fc014b0b083a6d2fdb1/image.png?h=250"  # noqa
+    _logo_url = "https://cdn.sanity.io/images/3ugk85nk/production/624870fcf18298f6bf0efb55046e50765620eabd-72x72.png"  # noqa
     _documentation_url = "https://prefecthq.github.io/prefect-monte-carlo/credentials/#prefect_monte_carlo.credentials.MonteCarloCredentials"  # noqa
 
     api_key: SecretStr = Field(
